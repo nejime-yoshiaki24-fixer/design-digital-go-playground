@@ -1,0 +1,214 @@
+/* アイコンギャラリー */
+.icon-gallery {
+  padding: 24px;
+}
+
+.icon-gallery h2 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #1A1A1A;
+}
+
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-gap: 24px;
+  gap: 24px;
+}
+
+.icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  background: #FFFFFF;
+  transition: all 0.2s ease;
+}
+
+.icon-item:hover {
+  border-color: #0017C1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.icon-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 8px;
+}
+
+.icon-name {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #333333;
+  margin-bottom: 4px;
+}
+
+.icon-description {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 11px;
+  color: #666666;
+}
+
+/* サイズバリエーション */
+.icon-sizes {
+  padding: 24px;
+}
+
+.icon-sizes h2 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #1A1A1A;
+}
+
+.size-examples {
+  display: flex;
+  gap: 32px;
+  align-items: flex-end;
+}
+
+.size-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.size-group h3 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #666666;
+}
+
+/* カラーバリエーション */
+.icon-colors {
+  padding: 24px;
+}
+
+.icon-colors h2 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #1A1A1A;
+}
+
+.color-examples {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.color-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.color-group h3 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #666666;
+}
+
+/* 使用例 */
+.icon-usage {
+  padding: 24px;
+}
+
+.icon-usage h2 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #1A1A1A;
+}
+
+.usage-examples {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 400px;
+}
+
+.button-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #0017C1;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button-with-icon:hover {
+  background: #000099;
+}
+
+.button-with-icon svg {
+  fill: #FFFFFF;
+}
+
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid #949494;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.icon-button:hover {
+  background: #F5F5F5;
+  border-color: #666666;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #E0E0E0;
+  border-radius: 4px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px;
+  color: #1A1A1A;
+}
+
+.success-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #E8F5E9;
+  border: 1px solid #81C784;
+  border-radius: 4px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  color: #2E7D32;
+}
+
+/*# sourceMappingURL=components-Icons-Icons-stories.b5c7acd3.chunk.css.map*/
