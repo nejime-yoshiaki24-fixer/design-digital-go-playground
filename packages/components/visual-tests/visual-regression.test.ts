@@ -60,6 +60,11 @@ async function compareScreenshots(
   threshold = 0.1
 ): Promise<{ match: boolean; diffPixels: number; diffPercentage: number }> {
   if (!fs.existsSync(baselinePath)) {
+    // ベースラインディレクトリが存在しない場合は作成
+    const baselineDir = path.dirname(baselinePath);
+    if (!fs.existsSync(baselineDir)) {
+      fs.mkdirSync(baselineDir, { recursive: true });
+    }
     // ベースラインが存在しない場合は、現在のスクリーンショットをベースラインとして保存
     fs.copyFileSync(currentPath, baselinePath);
     return { match: true, diffPixels: 0, diffPercentage: 0 };
@@ -81,6 +86,11 @@ async function compareScreenshots(
   );
 
   if (diffPixels > 0) {
+    // diffディレクトリが存在しない場合は作成
+    const diffDir = path.dirname(diffPath);
+    if (!fs.existsSync(diffDir)) {
+      fs.mkdirSync(diffDir, { recursive: true });
+    }
     fs.writeFileSync(diffPath, PNG.sync.write(diff));
   }
 
@@ -108,6 +118,12 @@ components.forEach(component => {
         const baselinePath = path.join('screenshots', 'baseline', screenshotName);
         const currentPath = path.join('screenshots', 'current', screenshotName);
         const diffPath = path.join('screenshots', 'diff', screenshotName);
+
+        // currentディレクトリが存在しない場合は作成
+        const currentDir = path.dirname(currentPath);
+        if (!fs.existsSync(currentDir)) {
+          fs.mkdirSync(currentDir, { recursive: true });
+        }
 
         // スクリーンショットを撮影
         await page.screenshot({
