@@ -49,14 +49,6 @@ jobs:
           node-version: 20.x
           cache: "npm"
 
-      - name: Cache Playwright browsers
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            playwright-${{ runner.os }}-
-
       - name: Cache visual test baselines
         uses: actions/cache@v4
         with:
@@ -81,6 +73,13 @@ jobs:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}
 
+      - name: Install fonts for consistent rendering
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk fonts-liberation
+          fc-cache -f -v
+
       - name: Install Playwright Browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps chromium
@@ -97,6 +96,14 @@ jobs:
           name: visual-test-report
           path: packages/components/visual-test-report/
           retention-days: 30
+
+      - name: Upload visual test diff images
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: visual-test-diff
+          path: packages/components/screenshots/diff/
+          retention-days: 7
 
   test-mcp-server:
     runs-on: ubuntu-latest

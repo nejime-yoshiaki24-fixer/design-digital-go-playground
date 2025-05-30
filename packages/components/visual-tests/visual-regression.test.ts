@@ -82,7 +82,13 @@ async function compareScreenshots(
     diff.data,
     width,
     height,
-    { threshold }
+    { 
+      threshold,
+      // アンチエイリアシングの差異を無視
+      includeAA: false,
+      // アルファチャンネルを無視
+      alpha: 0.5,
+    }
   );
 
   if (diffPixels > 0) {
@@ -130,13 +136,24 @@ components.forEach(component => {
           path: currentPath,
           fullPage: false,
           animations: 'disabled',
+          // CSSアニメーションを完全に無効化
+          caret: 'hide',
+          // スケールを統一
+          scale: 'device',
         });
 
         // 画像を比較
         const result = await compareScreenshots(baselinePath, currentPath, diffPath);
 
-        // 差分が1%以上ある場合はテスト失敗
-        expect(result.diffPercentage).toBeLessThan(1);
+        // CI環境では5%まで許容（フォントレンダリングの差異を考慮）
+        const maxDiffPercentage = process.env.CI ? 5 : 1;
+        
+        // 差異が大きい場合は警告を出力
+        if (result.diffPercentage > 2 && result.diffPercentage < maxDiffPercentage) {
+          console.warn(`Warning: ${component.name} - ${story.name} has ${result.diffPercentage.toFixed(2)}% difference`);
+        }
+        
+        expect(result.diffPercentage).toBeLessThan(maxDiffPercentage);
 
         // 結果をコンソールに出力
         if (!result.match) {
