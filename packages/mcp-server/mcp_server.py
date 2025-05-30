@@ -21,7 +21,7 @@ from validators import DesignTokenValidator
 
 # Constants
 PROJECT_ROOT = Path(__file__).parent.parent
-COMPONENTS_DIR = PROJECT_ROOT / "src" / "components"
+COMPONENTS_DIR = PROJECT_ROOT / "components" / "src" / "components"
 
 # Design tokens
 DESIGN_TOKENS = {
