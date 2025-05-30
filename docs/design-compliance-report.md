@@ -5,6 +5,7 @@
 ### 1. **即座に実施可能な確認方法**
 
 #### A. ブラウザの開発者ツールで手動確認
+
 ```javascript
 // Chromeコンソールで実行
 const button = document.querySelector('.button--solid');
@@ -16,18 +17,21 @@ console.log('パディング:', styles.padding); // 16px
 ```
 
 #### B. Storybookアドオンの活用
+
 - **Storybook Measure**: 要素間の距離を測定
 - **Storybook Design**: Figmaデザインを直接埋め込んで比較
 
 ### 2. **半自動化された確認方法**
 
 #### デザイントークン検証スクリプト
+
 ```bash
 # 実行コマンド（作成予定）
 npm run validate:design-tokens
 ```
 
 実装内容：
+
 - CSSから値を抽出
 - Figmaのデザイントークンと比較
 - 差分をレポート出力
@@ -35,6 +39,7 @@ npm run validate:design-tokens
 ### 3. **完全自動化の確認方法**
 
 #### Visual Regression Testing
+
 1. **Chromatic** (推奨)
    - Storybook統合済み
    - CI/CDパイプラインに組み込み可能
@@ -93,16 +98,19 @@ const figmaComponents = [
 ## 推奨アクション
 
 ### 短期的（すぐに実施可能）
+
 1. Storybookで目視確認
 2. 開発者ツールで計測値確認
 3. 主要なデザイントークンの手動検証
 
 ### 中期的（1-2週間）
+
 1. Visual Regression Testingツール導入
 2. CI/CDパイプラインへの組み込み
 3. 定期的な自動チェック
 
 ### 長期的（1ヶ月以降）
+
 1. Figmaとの完全自動同期システム
 2. デザイントークンの自動生成
 3. コンポーネントライブラリとしての公開

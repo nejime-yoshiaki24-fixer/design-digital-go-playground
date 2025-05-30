@@ -8,6 +8,7 @@ Playwright + pixelmatchを使用して、Storybookのコンポーネントのス
 ## セットアップ
 
 ### 必要なパッケージ（インストール済み）
+
 - `@playwright/test`: ブラウザ自動化とテストフレームワーク
 - `pixelmatch`: 画像比較ライブラリ
 - `pngjs`: PNG画像の読み書き
@@ -35,6 +36,7 @@ npm run test:visual
 ```
 
 差分が検出された場合：
+
 - `screenshots/diff/` フォルダに差分画像が保存されます
 - テストが失敗し、差分の詳細が表示されます
 
@@ -74,23 +76,27 @@ screenshots/
 現在、以下のコンポーネントとバリエーションがテストされます：
 
 ### Button
+
 - default (Solid, Large)
 - outline
 - small
 - disabled
 
 ### Checkbox
+
 - default (unchecked)
 - checked
 - disabled
 - with-error
 
 ### Divider
+
 - default (solid, thin)
 - dashed
 - thick
 
 ### Accordion
+
 - default (collapsed)
 - expanded
 
@@ -106,14 +112,17 @@ const result = await compareScreenshots(baselinePath, currentPath, diffPath, 0.1
 ## トラブルシューティング
 
 ### テストがタイムアウトする
+
 - Storybookが起動していることを確認
 - `playwright.config.ts` の `webServer.timeout` を増やす
 
 ### フォントレンダリングの差異
+
 - OSやブラウザによってフォントレンダリングが異なる場合があります
 - 閾値を調整するか、CI環境でのみテストを実行することを検討
 
 ### アニメーションによる差異
+
 - スクリーンショット撮影時にアニメーションは無効化されていますが、
   トランジションが完了するまで待機時間を調整する必要がある場合があります
 
