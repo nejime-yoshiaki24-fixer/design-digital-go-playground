@@ -5,7 +5,7 @@
 ## 🗂 プロジェクト構造
 
 ```
-design-digital-go/
+design-system-mcp-playground/
 ├── packages/
 │   ├── components/    # Reactコンポーネントライブラリ
 │   └── mcp-server/    # Model Context Protocolサーバー
@@ -51,7 +51,7 @@ npm run test:mcp
 
 ## 📦 パッケージ
 
-### @design-digital-go/components
+### @design-system-mcp/components
 
 デジタル庁デザインシステムに準拠したReactコンポーネントのコレクション。
 
@@ -62,7 +62,7 @@ npm run test:mcp
 - **Icons**: システムアイコンセット
 - **Table**: ソート、フィルタリング、ページネーション対応
 
-[Storybookデモ](https://napnel.github.io/design-digital-go/)
+[Storybookデモ](https://napnel.github.io/design-system-mcp-playground/)
 
 ### mcp-server
 

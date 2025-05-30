@@ -116,6 +116,6 @@ uv run python test_server.py
 
 ## 注意事項
 
-- このサーバーは親ディレクトリ（design-digital-go-playground）のファイルを参照します
+- このサーバーは親ディレクトリ（design-system-mcp-playground）のファイルを参照します
 - 実行時は必ず `mcp-server` ディレクトリから起動してください
 - Figma同期機能は現在モックデータを使用しています（将来的にFigma MCPと統合予定）

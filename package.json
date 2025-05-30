@@ -1,5 +1,5 @@
 {
-  "name": "design-digital-go",
+  "name": "design-system-mcp-playground",
   "version": "1.0.0",
   "private": true,
   "description": "デジタル庁デザインシステム準拠のUIコンポーネントライブラリとMCPサーバー",
@@ -7,12 +7,12 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:components": "npm run start -w @design-digital-go/components",
-    "dev:storybook": "npm run storybook -w @design-digital-go/components",
+    "dev:components": "npm run start -w @design-system-mcp/components",
+    "dev:storybook": "npm run storybook -w @design-system-mcp/components",
     "dev:mcp": "cd packages/mcp-server && uv run mcp_server.py",
-    "build:components": "npm run build -w @design-digital-go/components",
-    "test:components": "npm test -w @design-digital-go/components",
-    "test:visual": "npm run test:visual -w @design-digital-go/components",
+    "build:components": "npm run build -w @design-system-mcp/components",
+    "test:components": "npm test -w @design-system-mcp/components",
+    "test:visual": "npm run test:visual -w @design-system-mcp/components",
     "test:mcp": "cd packages/mcp-server && uv run pytest",
     "clean": "rm -rf packages/*/node_modules packages/*/build packages/*/dist",
     "install:all": "npm install && cd packages/mcp-server && uv sync"
