@@ -1,0 +1,236 @@
+.table-container {
+  width: 100%;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.table-container--responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table__caption {
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #333333;
+  text-align: left;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #FFFFFF;
+  font-size: 14px;
+  color: #333333;
+}
+
+/* ボーダー */
+.table--bordered {
+  border: 1px solid #949494;
+}
+
+.table--bordered .table__header-cell,
+.table--bordered .table__cell {
+  border: 1px solid #949494;
+}
+
+/* ヘッダー */
+.table__head {
+  background-color: #F5F5F5;
+}
+
+.table__header-cell {
+  padding: 16px;
+  font-weight: 700;
+  text-align: left;
+  vertical-align: middle;
+  position: relative;
+  white-space: nowrap;
+}
+
+.table--compact .table__header-cell {
+  padding: 8px 12px;
+}
+
+.table__header-cell--center {
+  text-align: center;
+}
+
+.table__header-cell--right {
+  text-align: right;
+}
+
+.table__header-cell--sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.table__header-cell--sortable:hover {
+  background-color: #E5E5E5;
+}
+
+.table__header-cell--sortable:focus {
+  outline: 3px solid #0017C1;
+  outline-offset: -3px;
+}
+
+.table__header-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.table__header-text {
+  display: inline-block;
+}
+
+/* ソートアイコン */
+.table__sort-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  color: #767676;
+  transition: color 0.2s ease;
+}
+
+.table__sort-icon--inactive {
+  opacity: 0.5;
+}
+
+.table__sort-icon--asc,
+.table__sort-icon--desc {
+  color: #0017C1;
+}
+
+/* ボディ */
+.table__body {
+  background-color: #FFFFFF;
+}
+
+.table__row {
+  transition: background-color 0.2s ease;
+}
+
+.table__row--clickable {
+  cursor: pointer;
+}
+
+.table__row--clickable:focus {
+  outline: 3px solid #0017C1;
+  outline-offset: -3px;
+}
+
+/* ストライプ */
+.table--striped .table__body .table__row:nth-child(even) {
+  background-color: #F9F9F9;
+}
+
+/* ホバー */
+.table--hoverable .table__body .table__row:hover {
+  background-color: #F5F5F5;
+}
+
+/* セル */
+.table__cell {
+  padding: 16px;
+  vertical-align: middle;
+}
+
+.table--compact .table__cell {
+  padding: 8px 12px;
+}
+
+.table__cell--center {
+  text-align: center;
+}
+
+.table__cell--right {
+  text-align: right;
+}
+
+.table__cell--empty,
+.table__cell--loading {
+  text-align: center;
+  color: #767676;
+  padding: 32px;
+}
+
+/* ローディング */
+.table--loading {
+  position: relative;
+  opacity: 0.6;
+}
+
+.table__loading-spinner {
+  display: inline-block;
+  color: #0017C1;
+}
+
+/* リンクセル */
+.table__cell a {
+  color: #0017C1;
+  text-decoration: none;
+  transition: text-decoration 0.2s ease;
+}
+
+.table__cell a:hover {
+  text-decoration: underline;
+}
+
+.table__cell a:focus {
+  outline: 2px solid #0017C1;
+  outline-offset: 2px;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  .table {
+    font-size: 12px;
+  }
+
+  .table__header-cell,
+  .table__cell {
+    padding: 12px;
+  }
+
+  .table--compact .table__header-cell,
+  .table--compact .table__cell {
+    padding: 6px 8px;
+  }
+
+  .table__caption {
+    font-size: 14px;
+  }
+
+  /* モバイルでのスクロールヒント */
+  .table-container--responsive {
+    position: relative;
+  }
+
+  .table-container--responsive::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 20px;
+    background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.05));
+    pointer-events: none;
+  }
+
+  .table-container--responsive::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .table-container--responsive::-webkit-scrollbar-track {
+    background: #F5F5F5;
+  }
+
+  .table-container--responsive::-webkit-scrollbar-thumb {
+    background: #949494;
+    border-radius: 3px;
+  }
+}

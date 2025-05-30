@@ -1,0 +1,172 @@
+.table-with-pagination {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.table-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background-color: #F5F5F5;
+  border: 1px solid #949494;
+  border-radius: 8px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.table-pagination__left,
+.table-pagination__right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.table-pagination__center {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.table-pagination__total {
+  font-size: 14px;
+  color: #767676;
+}
+
+.table-pagination__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333333;
+  background-color: #FFFFFF;
+  border: 1px solid #949494;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.table-pagination__button:hover:not(:disabled) {
+  background-color: #F5F5F5;
+  border-color: #767676;
+}
+
+.table-pagination__button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 23, 193, 0.2);
+}
+
+.table-pagination__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.table-pagination__button--active {
+  font-weight: 700;
+  color: #FFFFFF;
+  background-color: #0017C1;
+  border-color: #0017C1;
+}
+
+.table-pagination__button--active:hover {
+  background-color: #001199;
+  border-color: #001199;
+}
+
+.table-pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  font-size: 14px;
+  color: #767676;
+}
+
+.table-pagination__size-changer,
+.table-pagination__jumper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.table-pagination__label {
+  font-size: 14px;
+  color: #333333;
+}
+
+.table-pagination__select,
+.table-pagination__input {
+  padding: 4px 8px;
+  font-size: 14px;
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #333333;
+  background-color: #FFFFFF;
+  border: 1px solid #949494;
+  border-radius: 4px;
+  transition: border-color 0.2s ease;
+}
+
+.table-pagination__select:hover,
+.table-pagination__input:hover {
+  border-color: #767676;
+}
+
+.table-pagination__select:focus,
+.table-pagination__input:focus {
+  outline: none;
+  border-color: #0017C1;
+  box-shadow: 0 0 0 3px rgba(0, 23, 193, 0.1);
+}
+
+.table-pagination__input {
+  width: 60px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .table-pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .table-pagination__left {
+    order: 2;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .table-pagination__center {
+    order: 1;
+  }
+
+  .table-pagination__right {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .table-pagination__total,
+  .table-pagination__label {
+    font-size: 12px;
+  }
+
+  .table-pagination__button {
+    min-width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .table-pagination__select,
+  .table-pagination__input {
+    font-size: 12px;
+  }
+}
