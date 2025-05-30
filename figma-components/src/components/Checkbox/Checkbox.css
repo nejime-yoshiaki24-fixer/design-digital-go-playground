@@ -1,0 +1,127 @@
+.checkbox-container {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.checkbox-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+  color: #333333;
+  line-height: 1.3;
+}
+
+/* チェックボックスのサイズ */
+.checkbox-container--small .checkbox-label {
+  font-size: 14px;
+  gap: 4px;
+}
+
+.checkbox-container--medium .checkbox-label {
+  font-size: 16px;
+  gap: 8px;
+}
+
+.checkbox-container--large .checkbox-label {
+  font-size: 18px;
+  gap: 12px;
+}
+
+/* チェックボックスのボックス */
+.checkbox-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #949494;
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.checkbox-container--small .checkbox-box {
+  width: 20px;
+  height: 20px;
+}
+
+.checkbox-container--medium .checkbox-box {
+  width: 32px;
+  height: 32px;
+}
+
+.checkbox-container--large .checkbox-box {
+  width: 40px;
+  height: 40px;
+}
+
+/* チェックマーク */
+.checkbox-check {
+  width: 70%;
+  height: 70%;
+  color: #0017C1;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.2s ease;
+}
+
+/* チェック状態 */
+.checkbox-input:checked + .checkbox-label .checkbox-box {
+  border-color: #0017C1;
+  background-color: #FFFFFF;
+}
+
+.checkbox-input:checked + .checkbox-label .checkbox-check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ホバー状態 */
+.checkbox-label:hover .checkbox-box {
+  border-color: #0017C1;
+  background-color: #F5F5F5;
+}
+
+/* フォーカス状態 */
+.checkbox-input:focus + .checkbox-label .checkbox-box {
+  outline: 3px solid #0017C1;
+  outline-offset: 2px;
+}
+
+/* 無効状態 */
+.checkbox-container--disabled .checkbox-label {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.checkbox-container--disabled .checkbox-label:hover .checkbox-box {
+  border-color: #949494;
+  background-color: #FFFFFF;
+}
+
+/* エラー状態 */
+.checkbox-container--error .checkbox-box {
+  border-color: #D32F2F;
+}
+
+.checkbox-error {
+  color: #D32F2F;
+  font-size: 12px;
+  font-family: 'Noto Sans JP', sans-serif;
+  margin-top: 4px;
+}
