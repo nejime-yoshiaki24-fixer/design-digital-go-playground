@@ -1,0 +1,11 @@
+{
+  "push": {
+    "ref": "refs/heads/main",
+    "repository": {
+      "name": "design-system-mcp-playground",
+      "owner": {
+        "login": "nejime-yoshiaki24-fixer"
+      }
+    }
+  }
+}

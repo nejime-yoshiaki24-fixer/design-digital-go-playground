@@ -48,3 +48,8 @@ __pycache__/
 # IDE
 .vscode/
 .idea/
+
+# Local development tools
+bin/
+.actrc
+.secrets
