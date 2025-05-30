@@ -39,6 +39,17 @@ const components = [
       { id: 'components-accordion--default-expanded', name: 'expanded' },
     ],
   },
+  {
+    name: 'Table',
+    stories: [
+      { id: 'components-table--default', name: 'default' },
+      { id: 'components-table--striped', name: 'striped' },
+      { id: 'components-table--compact', name: 'compact' },
+      { id: 'components-table--with-custom-render', name: 'with-custom-render' },
+      { id: 'components-table--empty', name: 'empty' },
+      { id: 'components-table--loading', name: 'loading' },
+    ],
+  },
 ];
 
 // スクリーンショットを比較する関数
