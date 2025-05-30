@@ -30,7 +30,6 @@
 - **主要スタイル**: Solid Fill, Size=Large, State=Default
 
 #### 検証項目と結果
-
 - ✅ **カラー**: 背景色 #0017C1（プライマリーカラー）が正しく適用
 - ✅ **タイポグラフィ**: Noto Sans JP、フォントウェイト700
 - ✅ **スペーシング**: パディング16px（Largeサイズ）
@@ -85,7 +84,6 @@
 ## テスト実行結果
 
 ### ユニットテスト
-
 ```
 Test Suites: 3 passed, 3 total
 Tests:       30 passed, 30 total
@@ -93,6 +91,9 @@ Coverage:    Button 100%, Divider 100%
 ```
 
 ### 視覚的リグレッションテスト (Playwright)
+
+
+=======
 
 ```
 実行テスト数: 14
