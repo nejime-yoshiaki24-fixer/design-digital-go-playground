@@ -3,18 +3,19 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './visual-tests',
   outputDir: './visual-test-results',
-  fullyParallel: false,
+  fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: 0,
-  workers: 1,
-  timeout: 60000,
+  workers: process.env.CI ? 4 : 8,
+  timeout: 30000,
   reporter: [['html', { outputFolder: 'visual-test-report' }]],
   
   use: {
     baseURL: 'http://localhost:6006',
-    trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
-    navigationTimeout: 30000,
+    trace: 'off',
+    screenshot: 'off',
+    video: 'off',
+    navigationTimeout: 15000,
   },
 
   projects: [
