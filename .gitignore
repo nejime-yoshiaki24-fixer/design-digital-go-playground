@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+packages/*/node_modules
 /.pnp
 .pnp.js
 
@@ -10,6 +11,8 @@
 
 # production
 /build
+packages/*/build
+packages/*/dist
 
 # misc
 .DS_Store
@@ -26,10 +29,22 @@ yarn-error.log*
 storybook-static
 
 # Visual Regression Testing
-visual-test-report/
-visual-test-results/
-screenshots/current/
-screenshots/diff/
+packages/*/visual-test-report/
+packages/*/visual-test-results/
+packages/*/screenshots/current/
+packages/*/screenshots/diff/
 
 # Storybook build output
-storybook-static/
+packages/*/storybook-static/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/

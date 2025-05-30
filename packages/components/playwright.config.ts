@@ -25,7 +25,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'npm run storybook',
+    command: 'npm run storybook -- --no-open',
     port: 6006,
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
