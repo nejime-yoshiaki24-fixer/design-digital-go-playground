@@ -42,7 +42,7 @@ npm run dev
 ### MCPインスペクターでのテスト
 
 ```bash
-npx @modelcontextprotocol/inspector dist/bin/server.js
+npx @modelcontextprotocol/inspector dist/index.js
 ```
 
 ### Claude Desktopでの使用
@@ -54,7 +54,7 @@ npx @modelcontextprotocol/inspector dist/bin/server.js
   "mcpServers": {
     "design-system-validator": {
       "command": "node",
-      "args": ["/path/to/mcp-server/dist/bin/server.js"]
+      "args": ["/path/to/mcp-server/dist/index.js"]
     }
   }
 }
@@ -67,7 +67,7 @@ npx @modelcontextprotocol/inspector dist/bin/server.js
 npm start
 
 # または直接実行
-node dist/bin/server.js
+node dist/index.js
 ```
 
 ## 開発
@@ -76,9 +76,8 @@ node dist/bin/server.js
 
 ```
 mcp-server/
-├── bin/
-│   └── server.ts         # MCPサーバーのエントリーポイント
 ├── src/
+│   ├── index.ts         # MCPサーバーのエントリーポイント
 │   ├── core/            # 共通機能
 │   │   ├── constants/   # 定数定義
 │   │   ├── types/       # 型定義

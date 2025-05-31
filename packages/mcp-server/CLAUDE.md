@@ -21,7 +21,7 @@ npm run build
 npm start
 
 # MCPインスペクターでテスト
-npx @modelcontextprotocol/inspector dist/bin/server.js
+npx @modelcontextprotocol/inspector dist/index.js
 ```
 
 ### Quality Checks
@@ -49,9 +49,8 @@ npm run typecheck && npm run lint && npm test
 
 ```
 mcp-server/
-├── bin/
-│   └── server.ts         # MCPサーバーのエントリーポイント
 ├── src/
+│   ├── index.ts         # MCPサーバーのエントリーポイント
 │   ├── core/            # 共通機能
 │   │   ├── constants/   # 定数定義
 │   │   ├── types/       # 型定義
