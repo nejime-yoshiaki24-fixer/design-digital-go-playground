@@ -18,7 +18,9 @@ export class LayoutValidator {
       .map((v) => parseInt(v));
 
     for (const match of mediaQueryMatches) {
-      const breakpoint = parseInt(match[1]);
+      const breakpointStr = match[1];
+      if (!breakpointStr) continue;
+      const breakpoint = parseInt(breakpointStr);
 
       // 許容範囲をチェック（完全一致または±1pxの差を許容）
       const isValid = validBreakpointValues.some(
@@ -39,7 +41,9 @@ export class LayoutValidator {
       /grid-template-columns:\s*repeat\((\d+),/g,
     );
     for (const match of gridColumnsMatches) {
-      const columns = parseInt(match[1]);
+      const columnsStr = match[1];
+      if (!columnsStr) continue;
+      const columns = parseInt(columnsStr);
       const validColumns = Object.values(this.validGrid.columns).filter(
         (v): v is number => v !== undefined,
       );
@@ -62,6 +66,7 @@ export class LayoutValidator {
 
     for (const match of gapMatches) {
       const gap = match[1];
+      if (!gap) continue;
 
       if (!validGaps.includes(gap)) {
         issues.push(
@@ -81,6 +86,7 @@ export class LayoutValidator {
 
     for (const match of marginMatches) {
       const margin = match[1];
+      if (!margin) continue;
 
       // auto, 0, または標準値を許可
       if (margin !== "0" && !validMargins.includes(margin)) {
@@ -99,7 +105,9 @@ export class LayoutValidator {
     const maxWidthMatches = cssContent.matchAll(/max-width:\s*(\d+)px/g);
 
     for (const match of maxWidthMatches) {
-      const maxWidth = parseInt(match[1]);
+      const maxWidthStr = match[1];
+      if (!maxWidthStr) continue;
+      const maxWidth = parseInt(maxWidthStr);
 
       // ブレークポイント値または一般的なコンテナ幅を許可
       const isValidBreakpoint = validBreakpointValues.some(

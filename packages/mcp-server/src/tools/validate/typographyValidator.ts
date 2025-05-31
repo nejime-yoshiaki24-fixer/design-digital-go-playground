@@ -19,7 +19,9 @@ export class TypographyValidator {
     // フォントファミリーの検証
     const fontFamilyMatches = cssContent.matchAll(/font-family:\s*([^;]+);/g);
     for (const match of fontFamilyMatches) {
-      const fontFamily = match[1].trim().replace(/['"]/g, "");
+      const fontFamilyMatch = match[1];
+      if (!fontFamilyMatch) continue;
+      const fontFamily = fontFamilyMatch.trim().replace(/['"]/g, "");
       const validFonts = [
         this.validTypography.fontFamily.primary,
         this.validTypography.fontFamily.mono,
@@ -41,6 +43,7 @@ export class TypographyValidator {
     );
     for (const match of fontSizeMatches) {
       const fontSize = match[1];
+      if (!fontSize) continue;
       const validSizes = this.collectFontSizes();
 
       if (
@@ -61,6 +64,7 @@ export class TypographyValidator {
     );
     for (const match of fontWeightMatches) {
       const fontWeight = match[1];
+      if (!fontWeight) continue;
       const validWeights = Object.values(this.validTypography.fontWeight).map(
         String,
       );
@@ -76,7 +80,9 @@ export class TypographyValidator {
     // line-heightの検証
     const lineHeightMatches = cssContent.matchAll(/line-height:\s*([^;]+);/g);
     for (const match of lineHeightMatches) {
-      const lineHeight = match[1].trim();
+      const lineHeightMatch = match[1];
+      if (!lineHeightMatch) continue;
+      const lineHeight = lineHeightMatch.trim();
       const validLineHeights = this.collectLineHeights();
 
       // 数値のみ、または承認済みの値を許可
@@ -95,7 +101,9 @@ export class TypographyValidator {
       /letter-spacing:\s*([^;]+);/g,
     );
     for (const match of letterSpacingMatches) {
-      const letterSpacing = match[1].trim();
+      const letterSpacingMatch = match[1];
+      if (!letterSpacingMatch) continue;
+      const letterSpacing = letterSpacingMatch.trim();
       const validLetterSpacings = this.collectLetterSpacings();
 
       if (

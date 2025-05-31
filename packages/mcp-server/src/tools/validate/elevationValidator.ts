@@ -15,7 +15,8 @@ export class ElevationValidator {
     // box-shadowの検証
     const boxShadowMatches = cssContent.matchAll(/box-shadow:\s*([^;]+);/g);
     for (const match of boxShadowMatches) {
-      const boxShadow = match[1].trim();
+      const boxShadow = match[1]?.trim();
+      if (!boxShadow) continue;
 
       // none, initial, inherit, unsetは許可
       if (["none", "initial", "inherit", "unset"].includes(boxShadow)) {
@@ -45,7 +46,8 @@ export class ElevationValidator {
       /border-radius:\s*([^;]+);/g,
     );
     for (const match of borderRadiusMatches) {
-      const borderRadius = match[1].trim();
+      const borderRadius = match[1]?.trim();
+      if (!borderRadius) continue;
 
       // 承認済みの値かチェック
       if (
@@ -71,7 +73,8 @@ export class ElevationValidator {
       /filter:\s*drop-shadow\(([^)]+)\)/g,
     );
     for (const match of dropShadowMatches) {
-      const dropShadow = match[1].trim();
+      const dropShadow = match[1]?.trim();
+      if (!dropShadow) continue;
       issues.push(
         `drop-shadowの使用は推奨されません。代わりにbox-shadowを使用してください: '${dropShadow}'`,
       );
