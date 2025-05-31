@@ -5,10 +5,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // プロジェクトルート
-export const PROJECT_ROOT = join(__dirname, "..", "..", "..");
-export const SHARED_DIR = join(PROJECT_ROOT, "shared");
+export const PROJECT_ROOT = join(__dirname, "..", "..", "..", "..");
 
 // 共有リソース
-export const DESIGN_TOKENS_PATH = join(SHARED_DIR, "design-tokens.json");
-export const SCHEMAS_DIR = join(SHARED_DIR, "schemas");
+export const DESIGN_TOKENS_PATH = join(PROJECT_ROOT, "design-tokens", "tokens.json");
+export const SCHEMAS_DIR = join(PROJECT_ROOT, "schemas");
 

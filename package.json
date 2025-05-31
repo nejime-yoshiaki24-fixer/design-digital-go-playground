@@ -16,7 +16,8 @@
     "test:visual": "npm run test:visual -w @design-system-mcp/components",
     "test:mcp": "cd mcp-server && npm test",
     "clean": "rm -rf packages/*/node_modules packages/*/build packages/*/dist",
-    "install:all": "npm install"
+    "install:all": "npm install",
+    "sync:tokens": "node scripts/sync-tokens-from-figma.js"
   },
   "devDependencies": {
     "lerna": "^8.1.2"
