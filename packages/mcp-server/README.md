@@ -13,6 +13,8 @@
 - **design-tokens://colors** - カラーパレット定義
 - **design-tokens://spacing** - スペーシング定義
 - **design-tokens://typography** - タイポグラフィ定義
+- **design-tokens://elevation** - エレベーション（影）定義
+- **design-tokens://layout** - レイアウト・グリッド・ブレークポイント定義
 
 ### Tools（検証機能）
 - **validate_design_tokens** - CSSがデザイントークンに準拠しているか検証
@@ -35,6 +37,12 @@ npm run build
 
 ```bash
 npm run dev
+```
+
+### MCPインスペクターでのテスト
+
+```bash
+npx @modelcontextprotocol/inspector dist/bin/server.js
 ```
 
 ### Claude Desktopでの使用
@@ -129,6 +137,13 @@ const result = await client.callTool("validate_accessibility", {
   component_name: "Button"
 });
 ```
+
+## 技術スタック
+
+- **TypeScript** - 型安全な開発
+- **MCP SDK** - Model Context Protocol実装
+- **Zod** - スキーマ検証
+- **Jest** - テストフレームワーク
 
 ## ライセンス
 
