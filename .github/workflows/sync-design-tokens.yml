@@ -36,6 +36,11 @@ jobs:
         env:
           FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
         run: |
+          if [ -z "$FIGMA_ACCESS_TOKEN" ]; then
+            echo "⚠️  FIGMA_ACCESS_TOKEN が設定されていません。スキップします。"
+            echo "実際の運用では GitHub Secrets で FIGMA_ACCESS_TOKEN を設定してください。"
+            exit 0
+          fi
           npm run sync:tokens
 
       - name: Check for changes
