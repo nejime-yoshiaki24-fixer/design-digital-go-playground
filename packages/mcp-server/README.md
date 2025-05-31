@@ -1,121 +1,135 @@
-# Design Digital Go Playground MCP Server
+# Design System Validator MCP Server
 
-このMCPサーバーは、デジタル庁デザインシステムのコンポーネント情報を提供し、品質管理とFigma同期機能を備えています。
+デジタル庁デザインシステムの検証に特化したModel Context Protocol (MCP)サーバーです。
 
-## アーキテクチャ
+## 概要
 
-SOLID原則に基づいて設計されており、以下のモジュールで構成されています：
+このMCPサーバーは、Reactコンポーネントやスタイルシートがデジタル庁デザインシステムに準拠しているかを検証するための専用ツールです。デザイントークンの適用状況、アクセシビリティ基準への準拠、コンポーネント構造の適切性などを自動的にチェックできます。
 
-- `analyzers.py` - コンポーネント分析機能
-- `validators.py` - デザイントークン検証機能
-- `quality_metrics.py` - 品質メトリクス計算機能
-- `figma_sync.py` - Figma同期チェック機能
+## 主な機能
 
-## セットアップ
+### Resources（静的データ提供）
+- **design-tokens://all** - すべてのデザイントークン
+- **design-tokens://colors** - カラーパレット定義
+- **design-tokens://spacing** - スペーシング定義
+- **design-tokens://typography** - タイポグラフィ定義
 
-既にuvとMCP依存関係はインストール済みです。
+### Tools（検証機能）
+- **validate_design_tokens** - CSSがデザイントークンに準拠しているか検証
+- **analyze_component_structure** - コンポーネントの構造を分析して問題を検出
+- **validate_accessibility** - 基本的なアクセシビリティチェック（JIS X 8341-3:2016準拠）
 
-## サーバーの起動方法
-
-### 1. 開発モード（推奨）
-
-```bash
-cd mcp-server
-uv run mcp dev mcp_server.py
-```
-
-これにより、MCPインスペクターが起動し、ブラウザでサーバーの機能をテストできます。
-
-### 2. STDIOモード
+## インストール
 
 ```bash
-cd mcp-server
-uv run python mcp_server.py
+# 依存関係のインストール
+npm install
+
+# TypeScriptのビルド
+npm run build
 ```
 
-### 3. SSEモード
+## 使用方法
+
+### 開発モード
 
 ```bash
-cd mcp-server
-uv run python mcp_server.py --transport sse --port 8000
+npm run dev
 ```
 
-## 提供される機能
+### Claude Desktopでの使用
 
-### Resources（リソース）
+`claude_desktop_config.json`に以下を追加：
 
-1. **`components://list`** - 利用可能なコンポーネントの一覧
-2. **`component://{name}/info`** - 特定のコンポーネントの詳細情報
-3. **`design-tokens://colors`** - デザインシステムのカラートークン
-4. **`quality://dashboard`** 🆕 - 全コンポーネントの品質ダッシュボード
+```json
+{
+  "mcpServers": {
+    "design-system-validator": {
+      "command": "node",
+      "args": ["/path/to/mcp-server/dist/bin/server.js"]
+    }
+  }
+}
+```
 
-### Tools（ツール）
-
-1. **`analyze_component`** - コンポーネントの構造を分析
-2. **`check_design_compliance`** - CSSがデザイントークンに準拠しているかチェック
-3. **`check_figma_sync`** 🆕 - 特定コンポーネントのFigma同期状態をチェック
-4. **`check_all_figma_sync`** 🆕 - 全コンポーネントのFigma同期状態をチェック
-
-### Prompts（プロンプト）
-
-1. **`create_component_prompt`** - 新しいコンポーネント作成のためのプロンプト
-2. **`review_component_prompt`** - コンポーネントレビューのためのプロンプト
-
-## 新機能の詳細
-
-### 品質ダッシュボード
-
-全コンポーネントの品質状態を一覧で確認できます：
-
-- 総合品質スコア（0-100）
-- 完全準拠コンポーネント数
-- 改善が必要なコンポーネント
-- 具体的な改善推奨事項
-
-### Figma同期チェック
-
-Figmaデザインと実装の同期状態を確認：
-
-- 個別コンポーネントの同期状態
-- 全体の同期率
-- 具体的な差分の検出
-- アクション必要項目のリスト
-
-## Claude Desktopでの使用
+### コマンドラインでの使用
 
 ```bash
-cd mcp-server
-uv run mcp install mcp_server.py --name "Design System MCP"
+# ビルド後
+npm start
+
+# または直接実行
+node dist/bin/server.js
 ```
 
-これにより、Claude DesktopからこのMCPサーバーを使用できるようになります。
+## 開発
 
-## テスト方法
+### ディレクトリ構成
 
-### 自動テスト
+```
+mcp-server/
+├── bin/
+│   └── server.ts         # MCPサーバーのエントリーポイント
+├── src/
+│   ├── core/            # 共通機能
+│   │   ├── constants/   # 定数定義
+│   │   ├── types/       # 型定義
+│   │   └── utils/       # ユーティリティ関数
+│   ├── resources/       # MCPリソース
+│   │   └── tokens/      # デザイントークンプロバイダー
+│   └── tools/          # MCP検証ツール
+│       ├── analyze/    # コンポーネント構造分析
+│       └── validate/   # デザイントークン検証
+├── shared/             # 共有リソース
+│   └── design-tokens.json # デザイントークン定義
+└── tests/              # テストファイル
+```
+
+### 開発コマンド
 
 ```bash
-cd mcp-server
-uv run pytest
+# 型チェック
+npm run typecheck
+
+# リンティング
+npm run lint
+
+# フォーマット
+npm run format
+
+# テスト実行
+npm test
 ```
 
-### 手動テスト
+## 検証例
 
-```bash
-cd mcp-server
-uv run python test_server.py
+### デザイントークン検証
+
+```javascript
+// MCPクライアントから呼び出し
+const result = await client.callTool("validate_design_tokens", {
+  css_content: ".button { color: #0017C1; padding: 8px; }",
+  component_name: "Button"
+});
 ```
 
-### MCPインスペクター
+### コンポーネント構造分析
 
-開発モードで起動後、ブラウザで以下を試してください：
+```javascript
+const result = await client.callTool("analyze_component_structure", {
+  component_path: "/path/to/components/Button"
+});
+```
 
-1. Resources タブで `quality://dashboard` を選択して品質状態を確認
-2. Tools タブで `check_figma_sync` を選択し、コンポーネント名を入力
-3. 同期状態と改善推奨事項を確認
+### アクセシビリティ検証
 
-## 注意事項
+```javascript
+const result = await client.callTool("validate_accessibility", {
+  html_content: "<button>クリック</button>",
+  component_name: "Button"
+});
+```
 
-- このサーバーは親ディレクトリ（design-system-mcp-playground）のファイルを参照します
-- 実行時は必ず `mcp-server` ディレクトリから起動してください
-- Figma同期機能は現在モックデータを使用しています（将来的にFigma MCPと統合予定）
+## ライセンス
+
+MIT

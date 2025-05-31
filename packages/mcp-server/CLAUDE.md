@@ -7,92 +7,93 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Development
 
 ```bash
-# MCPインスペクターで開発（推奨）
-cd mcp-server
-uv run mcp dev mcp_server.py
+# 開発モードで起動（推奨）
+npm run dev
 
-# STDIOモードで起動
-uv run python mcp_server.py
+# ビルド
+npm run build
 
-# SSEモードで起動
-uv run python mcp_server.py --transport sse --port 8000
+# プロダクションモードで起動
+npm start
 ```
 
 ### Quality Checks
 
 ```bash
-# 型チェック（strict mode）
-uv run pyright mcp_server.py
+# 型チェック
+npm run typecheck
 
 # リンティング
-uv run ruff check mcp_server.py --fix
+npm run lint
 
 # フォーマット
-uv run ruff format mcp_server.py
+npm run format
 
 # テスト実行
-uv run pytest
+npm test
 
 # すべてのチェックを実行
-uv run pyright mcp_server.py && uv run ruff check mcp_server.py && uv run ruff format mcp_server.py && uv run pytest
+npm run typecheck && npm run lint && npm test
 ```
 
 ## Architecture
 
-このMCPサーバーは、デジタル庁デザインシステムのReactコンポーネントを管理するためのModel Context Protocol (MCP)サーバーです。SOLID原則に基づいた設計で、品質分析とFigma同期機能を提供します。
+このMCPサーバーは、デジタル庁デザインシステムの検証に特化したModel Context Protocol (MCP)サーバーです。TypeScriptで実装され、デザイントークン準拠性、アクセシビリティ、コンポーネント構造の検証機能を提供します。
 
-### モジュール構成
+### ディレクトリ構成
 
-- **mcp_server.py**: メインサーバー実装、すべてのリソース・ツール・プロンプトを統合
-- **analyzers.py**: コンポーネントの構造分析（StructureAnalyzer, FileAnalyzer）
-- **validators.py**: デザイントークン準拠性検証（DesignTokenValidator）
-- **quality_metrics.py**: 品質メトリクス計算（ComponentQuality, CompletenessCalculator, QualityAggregator）
-- **figma_sync.py**: Figma同期状態チェック（ComponentSyncChecker, MockFigmaConnector）
+```
+mcp-server/
+├── bin/
+│   └── server.ts         # MCPサーバーのエントリーポイント
+├── src/
+│   ├── core/            # 共通機能
+│   │   ├── constants/   # 定数定義
+│   │   ├── types/       # 型定義
+│   │   └── utils/       # ユーティリティ関数
+│   ├── resources/       # MCPリソース
+│   │   └── tokens/      # デザイントークンプロバイダー
+│   └── tools/          # MCP検証ツール
+│       ├── analyze/    # コンポーネント構造分析
+│       └── validate/   # デザイントークン検証
+├── shared/             # 共有リソース
+│   └── design-tokens.json # デザイントークン定義
+└── tests/              # テストファイル
+```
 
 ### 提供機能
 
 **Resources:**
-
-- `components://list` - コンポーネント一覧
-- `component://{name}/info` - 個別コンポーネント情報
-- `design-tokens://colors` - 承認済みカラートークン
-- `quality://dashboard` - 品質ダッシュボード
+- `design-tokens://all` - すべてのデザイントークン
+- `design-tokens://colors` - カラートークン
+- `design-tokens://spacing` - スペーシングトークン
+- `design-tokens://typography` - タイポグラフィトークン
 
 **Tools:**
-
-- `analyze_component` - コンポーネント構造分析
-- `check_design_compliance` - デザイン準拠チェック
-- `check_figma_sync` - Figma同期チェック
-- `check_all_figma_sync` - 全コンポーネント同期状態
-
-**Prompts:**
-
-- `create_component_prompt` - 新規コンポーネント作成支援
-- `review_component_prompt` - コードレビュー支援
+- `validate_design_tokens` - CSSのデザイントークン準拠性検証
+- `analyze_component_structure` - コンポーネント構造の分析
+- `validate_accessibility` - 基本的なアクセシビリティチェック
 
 ### 重要な制約
 
-1. **Pydantic型定義必須**: すべてのツールとプロンプトの引数はPydanticのBaseModelで定義
-2. **実行ディレクトリ**: 必ず`mcp-server`ディレクトリから起動（親ディレクトリのコンポーネントを参照）
-3. **デザイントークン**: 承認済みの色とスペーシングのみ使用可能
+1. **検証特化**: このサーバーは検証機能に特化しており、コンポーネント生成や同期機能は含まれません
+2. **TypeScript専用**: すべての実装はTypeScriptで行われています
+3. **デザイントークン**: デジタル庁の承認済みトークンのみを基準として使用
 
 ### デザイントークン
 
 **承認済みカラー:**
-
 - プライマリ: #0017C1
 - グレースケール: #1A1A1C, #595959, #767676, #D9D9D9, #F0F0F0, #FFFFFF
 - セマンティック: #D32F2F (エラー), #FFC107 (警告), #4CAF50 (成功)
 
 **標準スペーシング:**
-
 - xs: 4px, sm: 8px, md: 16px, lg: 24px, xl: 32px
 
 ### 開発フロー
 
-1. 機能追加・修正時は対応するモジュールを編集
-2. Pydanticモデルで型定義を追加
-3. `uv run pyright`で型チェック
-4. `uv run ruff check --fix`でリンティング
-5. `uv run pytest`でテスト実行
-6. MCPインスペクターで動作確認
+1. 検証機能の追加・修正時は対応するtoolsモジュールを編集
+2. `npm run typecheck`で型チェック
+3. `npm run lint`でリンティング
+4. `npm test`でテスト実行
+5. `npm run dev`で動作確認
