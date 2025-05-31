@@ -53,3 +53,4 @@ __pycache__/
 bin/
 .actrc
 .secrets
+.act/

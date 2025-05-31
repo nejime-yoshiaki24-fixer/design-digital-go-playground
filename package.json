@@ -4,18 +4,19 @@
   "private": true,
   "description": "デジタル庁デザインシステム準拠のUIコンポーネントライブラリとMCPサーバー",
   "workspaces": [
-    "packages/*"
+    "web",
+    "mcp-server"
   ],
   "scripts": {
     "dev:components": "npm run start -w @design-system-mcp/components",
     "dev:storybook": "npm run storybook -w @design-system-mcp/components",
-    "dev:mcp": "cd packages/mcp-server && uv run mcp_server.py",
+    "dev:mcp": "cd mcp-server && npm run dev",
     "build:components": "npm run build -w @design-system-mcp/components",
     "test:components": "npm test -w @design-system-mcp/components",
     "test:visual": "npm run test:visual -w @design-system-mcp/components",
-    "test:mcp": "cd packages/mcp-server && uv run pytest",
+    "test:mcp": "cd mcp-server && npm test",
     "clean": "rm -rf packages/*/node_modules packages/*/build packages/*/dist",
-    "install:all": "npm install && cd packages/mcp-server && uv sync"
+    "install:all": "npm install"
   },
   "devDependencies": {
     "lerna": "^8.1.2"
