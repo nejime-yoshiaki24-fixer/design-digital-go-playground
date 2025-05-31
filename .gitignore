@@ -54,3 +54,6 @@ bin/
 .actrc
 .secrets
 .act/
+
+.mcp.json
+.env
