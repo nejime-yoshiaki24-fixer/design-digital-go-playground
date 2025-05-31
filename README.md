@@ -6,9 +6,8 @@
 
 ```
 design-system-mcp-playground/
-├── packages/
-│   ├── components/    # Reactコンポーネントライブラリ
-│   └── mcp-server/    # Model Context Protocolサーバー
+├── web/               # Reactウェブサイト（旧components）
+├── mcp-server/        # Model Context Protocolサーバー
 ├── docs/              # プロジェクトドキュメント
 ├── .claude/           # Claude Code設定
 └── .github/           # GitHub Actions CI/CD
@@ -51,9 +50,9 @@ npm run test:mcp
 
 ## 📦 パッケージ
 
-### @design-system-mcp/components
+### web
 
-デジタル庁デザインシステムに準拠したReactコンポーネントのコレクション。
+デジタル庁デザインシステムに準拠したReactウェブサイト。
 
 - **Button**: プライマリ、セカンダリ、アウトライン
 - **Checkbox**: 基本、エラー、無効状態
@@ -79,8 +78,6 @@ Figma連携と品質管理を提供するModel Context Protocolサーバー。
 
 - Node.js 18以上
 - npm 9以上
-- Python 3.13以上（MCPサーバー用）
-- uv（Python パッケージマネージャー）
 
 ### コマンド一覧
 

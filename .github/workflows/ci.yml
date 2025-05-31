@@ -33,9 +33,9 @@ jobs:
         with:
           filters: |
             components:
-              - 'packages/components/**'
+              - 'web/**'
             mcp-server:
-              - 'packages/mcp-server/**'
+              - 'mcp-server/**'
             ci-config:
               - '.github/workflows/**'
               - 'package*.json'
@@ -86,12 +86,12 @@ jobs:
 
       - name: Run ESLint
         run: npx eslint . --ext .js,.jsx,.ts,.tsx --report-unused-disable-directives --max-warnings 0
-        working-directory: packages/components
+        working-directory: web
         continue-on-error: true
 
       - name: Check TypeScript
         run: npx tsc --noEmit
-        working-directory: packages/components
+        working-directory: web
 
   # コンポーネントテスト
   test-components:
@@ -101,7 +101,7 @@ jobs:
     if: needs.detect-changes.outputs.components == 'true' || needs.detect-changes.outputs.ci-config == 'true'
     defaults:
       run:
-        working-directory: packages/components
+        working-directory: web
 
     steps:
       - uses: actions/checkout@v4
@@ -140,7 +140,7 @@ jobs:
     if: needs.detect-changes.outputs.components == 'true'
     defaults:
       run:
-        working-directory: packages/components
+        working-directory: web
 
     steps:
       - uses: actions/checkout@v4
@@ -163,7 +163,7 @@ jobs:
       - name: Cache visual test baselines
         uses: actions/cache@v4
         with:
-          path: packages/components/screenshots/baseline
+          path: web/screenshots/baseline
           key: visual-baselines-${{ hashFiles('packages/components/screenshots/baseline/**') }}
           restore-keys: |
             visual-baselines-
@@ -207,7 +207,7 @@ jobs:
         if: always()
         with:
           name: visual-test-report
-          path: packages/components/visual-test-report/
+          path: web/visual-test-report/
           retention-days: 30
 
       - name: Upload visual test diff images
@@ -215,7 +215,7 @@ jobs:
         if: failure()
         with:
           name: visual-test-diff
-          path: packages/components/screenshots/diff/
+          path: web/screenshots/diff/
           retention-days: 7
 
   # MCPサーバーテスト（mcp-server変更時のみ）
@@ -226,7 +226,7 @@ jobs:
     if: needs.detect-changes.outputs.mcp-server == 'true' || needs.detect-changes.outputs.ci-config == 'true'
     defaults:
       run:
-        working-directory: packages/mcp-server
+        working-directory: mcp-server
 
     steps:
       - uses: actions/checkout@v4
@@ -335,7 +335,7 @@ jobs:
 
       - name: Build Storybook
         run: npm run build-storybook
-        working-directory: packages/components
+        working-directory: web
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -343,7 +343,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./packages/components/storybook-static
+          path: ./web/storybook-static
 
   deploy-storybook:
     name: Deploy Storybook
