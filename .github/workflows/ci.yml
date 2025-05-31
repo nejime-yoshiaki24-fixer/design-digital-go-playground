@@ -95,16 +95,8 @@ jobs:
         run: npm ci
         working-directory: ${{ github.workspace }}
 
-      - name: Run tests with coverage
-        run: npm test -- --watchAll=false --coverage --coverageReporters=json,lcov,text
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          fail_ci_if_error: false
-          flags: components
-          name: components-coverage
+      - name: Run tests
+        run: npm test -- --watchAll=false
 
       - name: Build
         run: npm run build
@@ -223,8 +215,8 @@ jobs:
       - name: Install dependencies
         run: uv sync
 
-      - name: Run tests with coverage
-        run: uv run pytest --cov=src --cov-report=xml --cov-report=term
+      - name: Run tests
+        run: uv run pytest
 
       - name: Run linting
         run: |
