@@ -5,16 +5,17 @@
   "private": true,
   "type": "module",
   "bin": {
-    "design-system-validator": "./bin/server.ts"
+    "design-system-validator": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc",
-    "dev": "tsx watch bin/server.ts",
-    "start": "node dist/bin/server.js",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "inspector": "npm run build && npx @modelcontextprotocol/inspector dist/index.js",
     "test": "NODE_OPTIONS='--experimental-vm-modules' jest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --ext .ts",
-    "format": "prettier --write \"src/**/*.ts\" \"bin/**/*.ts\""
+    "format": "prettier --write \"src/**/*.ts\""
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.5",
