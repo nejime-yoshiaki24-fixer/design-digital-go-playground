@@ -15,7 +15,6 @@ concurrency:
 # 共通の環境変数
 env:
   NODE_VERSION: '20.x'
-  PYTHON_VERSION: '3.13'
 
 jobs:
   # コード品質チェック
@@ -196,33 +195,34 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v6
-
-      - name: Cache uv dependencies
+      - name: Cache node_modules
         uses: actions/cache@v4
+        id: cache-node-modules
         with:
-          path: ~/.cache/uv
-          key: ${{ runner.os }}-uv-${{ hashFiles('**/pyproject.toml', '**/uv.lock') }}
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-uv-
+            ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: uv sync
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm ci
+        working-directory: ${{ github.workspace }}
+
+      - name: Run TypeScript check
+        run: npx tsc --noEmit
 
       - name: Run tests
-        run: uv run pytest
+        run: npm test
 
-      - name: Run linting
-        run: |
-          uv run ruff check src tests
-          uv run mypy src
-        continue-on-error: true
+      - name: Build
+        run: npm run build
 
   # 統合チェック（すべてのテストが成功したことを確認）
   check-all:
