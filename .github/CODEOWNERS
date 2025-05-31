@@ -1,0 +1,29 @@
+# CODEOWNERS file
+# This file defines who is responsible for code in this repository
+
+# Default owner for everything
+* @napnel
+
+# Frontend components
+/packages/components/ @napnel
+*.tsx @napnel
+*.css @napnel
+*.scss @napnel
+
+# MCP Server
+/packages/mcp-server/ @napnel
+*.py @napnel
+
+# Documentation
+*.md @napnel
+/docs/ @napnel
+
+# CI/CD and DevOps
+/.github/ @napnel
+*.yml @napnel
+*.yaml @napnel
+
+# Build and config files
+package*.json @napnel
+tsconfig*.json @napnel
+pyproject.toml @napnel
