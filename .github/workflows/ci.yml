@@ -17,10 +17,51 @@ env:
   NODE_VERSION: '20.x'
 
 jobs:
-  # コード品質チェック
-  lint:
-    name: Lint & Format Check
+  # 変更パス検出
+  detect-changes:
+    name: Detect Changes
     runs-on: ubuntu-latest
+    outputs:
+      components: ${{ steps.changes.outputs.components }}
+      mcp-server: ${{ steps.changes.outputs.mcp-server }}
+      ci-config: ${{ steps.changes.outputs.ci-config }}
+      docs: ${{ steps.changes.outputs.docs }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            components:
+              - 'packages/components/**'
+            mcp-server:
+              - 'packages/mcp-server/**'
+            ci-config:
+              - '.github/workflows/**'
+              - 'package*.json'
+            docs:
+              - 'docs/**'
+              - '*.md'
+
+  # セキュリティチェック（全体的な変更で実行）
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.components == 'true' || needs.detect-changes.outputs.mcp-server == 'true' || needs.detect-changes.outputs.ci-config == 'true'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+
+  # コンポーネント関連のジョブ
+  lint-components:
+    name: Lint Components
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.components == 'true' || needs.detect-changes.outputs.ci-config == 'true'
     steps:
       - uses: actions/checkout@v4
 
@@ -52,21 +93,12 @@ jobs:
         run: npx tsc --noEmit
         working-directory: packages/components
 
-  # セキュリティチェック
-  security:
-    name: Security Scan
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Run npm audit
-        run: npm audit --audit-level=moderate
-        continue-on-error: true
-
   # コンポーネントテスト
   test-components:
     name: Component Tests
     runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.components == 'true' || needs.detect-changes.outputs.ci-config == 'true'
     defaults:
       run:
         working-directory: packages/components
@@ -100,10 +132,12 @@ jobs:
       - name: Build
         run: npm run build
 
-  # ビジュアルテスト
+  # ビジュアルテスト（components変更時のみ）
   test-visual:
     name: Visual Regression Tests
     runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.components == 'true'
     defaults:
       run:
         working-directory: packages/components
@@ -184,10 +218,12 @@ jobs:
           path: packages/components/screenshots/diff/
           retention-days: 7
 
-  # MCPサーバーテスト
+  # MCPサーバーテスト（mcp-server変更時のみ）
   test-mcp-server:
     name: MCP Server Tests
     runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.mcp-server == 'true' || needs.detect-changes.outputs.ci-config == 'true'
     defaults:
       run:
         working-directory: packages/mcp-server
@@ -218,33 +254,58 @@ jobs:
       - name: Run TypeScript check
         run: npx tsc --noEmit
 
+      - name: Run lint
+        run: npm run lint
+
       - name: Run tests
         run: npm test
 
       - name: Build
         run: npm run build
 
-  # 統合チェック（すべてのテストが成功したことを確認）
+  # 統合チェック（実行されたジョブの結果を確認）
   check-all:
     name: All Checks Passed
     runs-on: ubuntu-latest
-    needs: [lint, security, test-components, test-visual, test-mcp-server]
+    needs: [detect-changes, security, lint-components, test-components, test-visual, test-mcp-server]
     if: always()
     steps:
       - name: Check results
         run: |
-          if [[ "${{ contains(needs.*.result, 'failure') }}" == "true" ]]; then
-            echo "One or more checks failed"
+          # 実行されたジョブのみを確認
+          declare -A job_results=(
+            ["security"]="${{ needs.security.result }}"
+            ["lint-components"]="${{ needs.lint-components.result }}"
+            ["test-components"]="${{ needs.test-components.result }}"
+            ["test-visual"]="${{ needs.test-visual.result }}"
+            ["test-mcp-server"]="${{ needs.test-mcp-server.result }}"
+          )
+          
+          failed_jobs=()
+          for job in "${!job_results[@]}"; do
+            result="${job_results[$job]}"
+            if [[ "$result" == "failure" ]]; then
+              failed_jobs+=("$job")
+            elif [[ "$result" == "" || "$result" == "skipped" ]]; then
+              echo "Job $job was skipped (no relevant changes)"
+            else
+              echo "Job $job: $result"
+            fi
+          done
+          
+          if [[ ${#failed_jobs[@]} -gt 0 ]]; then
+            echo "Failed jobs: ${failed_jobs[*]}"
             exit 1
           fi
-          echo "All checks passed!"
+          
+          echo "All executed checks passed!"
 
-  # Storybookのビルドとデプロイ
+  # Storybookのビルドとデプロイ（components変更時のみ）
   build-storybook:
     name: Build Storybook
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.detect-changes.outputs.components == 'true'
     runs-on: ubuntu-latest
-    needs: [check-all]
+    needs: [detect-changes, check-all]
     permissions:
       contents: read
       pages: write
@@ -291,6 +352,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build-storybook
+    if: needs.build-storybook.result == 'success'
     permissions:
       pages: write
       id-token: write
@@ -298,4 +360,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
