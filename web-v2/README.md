@@ -83,6 +83,7 @@ web-v2/
 ## コンポーネント
 
 ### ボタン (Button)
+
 ```tsx
 <Button variant="default">デフォルト</Button>
 <Button variant="outline">アウトライン</Button>
@@ -90,6 +91,7 @@ web-v2/
 ```
 
 ### カード (Card)
+
 ```tsx
 <Card>
   <CardHeader>
@@ -103,6 +105,7 @@ web-v2/
 ```
 
 ### アラート (Alert)
+
 ```tsx
 <AlertWithIcon variant="info">
   <AlertDescription>
