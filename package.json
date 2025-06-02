@@ -11,12 +11,16 @@
     "dev:components": "npm run start -w @design-system-mcp/components",
     "dev:storybook": "npm run storybook -w @design-system-mcp/components",
     "dev:mcp": "cd mcp-server && npm run dev",
+    "dev:v2": "cd web-v2 && npm run dev",
+    "dev:v2:storybook": "cd web-v2 && npm run storybook",
     "build:components": "npm run build -w @design-system-mcp/components",
+    "build:v2": "cd web-v2 && npm run build",
+    "build:v2:storybook": "cd web-v2 && npm run build-storybook",
     "test:components": "npm test -w @design-system-mcp/components",
     "test:visual": "npm run test:visual -w @design-system-mcp/components",
     "test:mcp": "cd mcp-server && npm test",
     "clean": "rm -rf packages/*/node_modules packages/*/build packages/*/dist",
-    "install:all": "npm install",
+    "install:all": "npm install && cd web-v2 && npm install",
     "sync:tokens": "node scripts/sync-tokens-from-figma.js"
   },
   "devDependencies": {
