@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import '../src/global.css'
+import '../global.css'
 
 export const metadata: Metadata = {
   title: 'デジタル庁デザインシステム - コンポーネント展示',

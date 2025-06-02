@@ -51,17 +51,22 @@ npm run dev:v2
 
 ```
 web-v2/
-├── app/                 # Next.js App Router
-│   ├── layout.tsx       # ルートレイアウト
-│   ├── page.tsx         # ホームページ
-│   └── components/      # コンポーネント展示ページ
-│       ├── page.tsx     # コンポーネント一覧
-│       ├── button/      # Buttonコンポーネント詳細
-│       ├── card/        # Cardコンポーネント詳細
-│       └── alert/       # Alertコンポーネント詳細
-├── src/
+├── src/                 # アプリケーションコード（Next.js 15推奨構造）
+│   ├── app/             # Next.js App Router
+│   │   ├── layout.tsx   # ルートレイアウト
+│   │   ├── page.tsx     # ホームページ
+│   │   └── components/  # コンポーネント展示ページ
+│   │       ├── page.tsx # コンポーネント一覧
+│   │       ├── button/  # Buttonコンポーネント詳細
+│   │       ├── input/   # Inputコンポーネント詳細
+│   │       ├── select/  # Selectコンポーネント詳細
+│   │       ├── checkbox/ # Checkboxコンポーネント詳細
+│   │       ├── table/   # Tableコンポーネント詳細
+│   │       ├── badge/   # Badgeコンポーネント詳細
+│   │       ├── card/    # Cardコンポーネント詳細
+│   │       └── alert/   # Alertコンポーネント詳細
 │   ├── components/      # UIコンポーネント
-│   │   ├── ui/         # 基本UIコンポーネント
+│   │   ├── ui/         # 基本UIコンポーネント（8種類）
 │   │   └── layout/     # レイアウトコンポーネント
 │   ├── lib/            # ユーティリティ関数
 │   ├── styles/         # グローバルスタイル
@@ -70,14 +75,19 @@ web-v2/
 │   └── global.css      # グローバルCSS
 ├── public/             # 静的ファイル
 ├── next.config.mjs     # Next.js設定
-└── postcss.config.js   # PostCSS設定
+└── postcss.config.mjs  # PostCSS設定
 ```
 
 ## ページ構成
 
 - `/` - ホームページ（デザインシステムの概要）
-- `/components` - コンポーネント一覧
+- `/components` - コンポーネント一覧（8種類、カテゴリ別バッジ付き）
 - `/components/button` - Buttonコンポーネントの詳細と使用例
+- `/components/input` - Inputコンポーネントの詳細とフォーム例
+- `/components/select` - Selectコンポーネントの詳細と実用例
+- `/components/checkbox` - Checkboxコンポーネントの詳細とグループ化例
+- `/components/table` - Tableコンポーネントの詳細とレスポンシブ対応
+- `/components/badge` - Badgeコンポーネントの詳細とステータス表示例
 - `/components/card` - Cardコンポーネントの詳細と使用例
 - `/components/alert` - Alertコンポーネントの詳細と使用例
 
