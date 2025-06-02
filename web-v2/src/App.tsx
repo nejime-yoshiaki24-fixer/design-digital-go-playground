@@ -7,16 +7,16 @@ import { AlertWithIcon, AlertDescription } from '@/components/ui/alert'
 function App() {
   return (
     <MainLayout>
-      <div className="space-y-[var(--spacing-8)]">
+      <div className="space-y-spacing-xl">
         {/* ヒーローセクション */}
-        <section className="text-center py-[var(--spacing-12)]">
-          <h1 className="text-[var(--font-size-5xl)] font-[var(--font-weight-bold)] text-[var(--color-gray-900)] mb-[var(--spacing-4)]">
+        <section className="text-center py-spacing-3xl">
+          <h1 className="text-font-size-5xl font-font-weight-bold text-foreground mb-spacing-md">
             デジタル庁デザインシステム
           </h1>
-          <p className="text-[var(--font-size-xl)] text-[var(--color-gray-600)] mb-[var(--spacing-8)]">
+          <p className="text-font-size-xl text-muted-foreground mb-spacing-xl">
             Vite + React + TypeScript + Tailwind CSS v4 + shadcn/ui
           </p>
-          <div className="flex justify-center gap-[var(--spacing-4)]">
+          <div className="flex justify-center gap-spacing-md">
             <Button size="lg">
               コンポーネントを見る
             </Button>
@@ -35,10 +35,10 @@ function App() {
 
         {/* 特徴カード */}
         <section>
-          <h2 className="text-[var(--font-size-3xl)] font-[var(--font-weight-bold)] text-[var(--color-gray-900)] mb-[var(--spacing-6)]">
+          <h2 className="text-font-size-3xl font-font-weight-bold text-foreground mb-spacing-lg">
             主な特徴
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-[var(--spacing-6)]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-spacing-lg">
             <Card>
               <CardHeader>
                 <CardTitle>最新の技術スタック</CardTitle>
@@ -47,7 +47,7 @@ function App() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-[var(--color-gray-700)]">
+                <p className="text-muted-foreground">
                   最新のツールチェインにより、開発効率と実行パフォーマンスを最大化
                 </p>
               </CardContent>
@@ -61,7 +61,7 @@ function App() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-[var(--color-gray-700)]">
+                <p className="text-muted-foreground">
                   色、スペーシング、タイポグラフィなど、統一されたデザイン言語を実装
                 </p>
               </CardContent>
@@ -75,7 +75,7 @@ function App() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-[var(--color-gray-700)]">
+                <p className="text-muted-foreground">
                   すべてのユーザーが使いやすいインターフェースを提供
                 </p>
               </CardContent>
@@ -85,10 +85,10 @@ function App() {
 
         {/* ボタンバリエーション */}
         <section>
-          <h2 className="text-[var(--font-size-2xl)] font-[var(--font-weight-bold)] text-[var(--color-gray-900)] mb-[var(--spacing-4)]">
+          <h2 className="text-font-size-2xl font-font-weight-bold text-foreground mb-spacing-md">
             ボタンコンポーネント
           </h2>
-          <div className="flex flex-wrap gap-[var(--spacing-4)]">
+          <div className="flex flex-wrap gap-spacing-md">
             <Button>デフォルト</Button>
             <Button variant="secondary">セカンダリ</Button>
             <Button variant="outline">アウトライン</Button>

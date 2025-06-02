@@ -4,15 +4,15 @@ import { cn } from "@/lib/utils"
 import { AlertCircle, CheckCircle2, Info, XCircle } from "lucide-react"
 
 const alertVariants = cva(
-  "relative w-full rounded-[var(--radius-md)] border p-[var(--spacing-4)] [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
+  "relative w-full rounded-radius-md border p-spacing-md [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
   {
     variants: {
       variant: {
-        default: "bg-white border-[var(--color-gray-300)] text-[var(--color-gray-900)]",
-        info: "bg-[var(--color-blue-50)] border-[var(--color-info)] text-[var(--color-blue-900)] [&>svg]:text-[var(--color-info)]",
-        success: "bg-green-50 border-[var(--color-success)] text-green-900 [&>svg]:text-[var(--color-success)]",
-        warning: "bg-yellow-50 border-[var(--color-warning)] text-yellow-900 [&>svg]:text-[var(--color-warning)]",
-        error: "bg-red-50 border-[var(--color-error)] text-red-900 [&>svg]:text-[var(--color-error)]",
+        default: "bg-background border-border text-foreground",
+        info: "bg-info/10 border-info text-info [&>svg]:text-info",
+        success: "bg-success/10 border-success text-success [&>svg]:text-success",
+        warning: "bg-warning/10 border-warning text-warning [&>svg]:text-warning",
+        error: "bg-error/10 border-error text-error [&>svg]:text-error",
       },
     },
     defaultVariants: {
@@ -40,7 +40,7 @@ const AlertTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h5
     ref={ref}
-    className={cn("mb-1 font-[var(--font-weight-semibold)] leading-none tracking-tight", className)}
+    className={cn("mb-1 font-font-weight-semibold leading-none tracking-tight", className)}
     {...props}
   />
 ))
@@ -52,7 +52,7 @@ const AlertDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("text-[var(--font-size-sm)] [&_p]:leading-relaxed", className)}
+    className={cn("text-font-size-sm [&_p]:leading-relaxed", className)}
     {...props}
   />
 ))

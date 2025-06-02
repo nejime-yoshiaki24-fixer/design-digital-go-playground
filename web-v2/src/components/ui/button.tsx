@@ -8,15 +8,15 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 
-          "bg-[var(--color-primary)] text-white hover:bg-[var(--color-blue-800)] focus-visible:ring-[var(--color-primary)]",
+          "bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-primary",
         secondary:
-          "bg-[var(--color-gray-200)] text-[var(--color-gray-900)] hover:bg-[var(--color-gray-300)] focus-visible:ring-[var(--color-gray-500)]",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 focus-visible:ring-secondary",
         outline:
-          "border-2 border-[var(--color-primary)] bg-transparent text-[var(--color-primary)] hover:bg-[var(--color-blue-50)] focus-visible:ring-[var(--color-primary)]",
+          "border-2 border-primary bg-transparent text-primary hover:bg-primary/10 focus-visible:ring-primary",
         ghost:
-          "hover:bg-[var(--color-gray-100)] hover:text-[var(--color-gray-900)] focus-visible:ring-[var(--color-gray-500)]",
+          "hover:bg-accent hover:text-accent-foreground focus-visible:ring-accent",
         destructive:
-          "bg-[var(--color-error)] text-white hover:bg-red-700 focus-visible:ring-[var(--color-error)]",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90 focus-visible:ring-destructive",
       },
       size: {
         default: "h-10 px-4 py-2",
@@ -25,10 +25,10 @@ const buttonVariants = cva(
         icon: "h-10 w-10",
       },
       radius: {
-        default: "rounded-[var(--radius-md)]",
-        sm: "rounded-[var(--radius-sm)]",
-        lg: "rounded-[var(--radius-lg)]",
-        full: "rounded-[var(--radius-full)]",
+        default: "rounded-radius-md",
+        sm: "rounded-radius-sm",
+        lg: "rounded-radius-lg",
+        full: "rounded-radius-full",
       },
     },
     defaultVariants: {

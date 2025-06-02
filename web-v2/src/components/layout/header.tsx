@@ -7,8 +7,8 @@ interface HeaderProps {
 
 export function Header({ onMenuClick }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[var(--color-gray-300)] bg-white shadow-[var(--shadow-sm)]">
-      <div className="container mx-auto flex h-16 items-center px-[var(--spacing-4)]">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background shadow-sm">
+      <div className="container mx-auto flex h-16 items-center px-spacing-md">
         <Button
           variant="ghost"
           size="icon"
@@ -20,34 +20,34 @@ export function Header({ onMenuClick }: HeaderProps) {
         </Button>
         
         <div className="flex flex-1 items-center justify-between">
-          <div className="flex items-center space-x-[var(--spacing-6)]">
-            <h1 className="text-[var(--font-size-xl)] font-[var(--font-weight-bold)] text-[var(--color-primary)]">
+          <div className="flex items-center space-x-spacing-lg">
+            <h1 className="text-font-size-xl font-font-weight-bold text-primary">
               デザインシステム v2
             </h1>
             
-            <nav className="hidden md:flex items-center space-x-[var(--spacing-6)]">
+            <nav className="hidden md:flex items-center space-x-spacing-lg">
               <a
                 href="#components"
-                className="text-[var(--font-size-sm)] font-[var(--font-weight-medium)] text-[var(--color-gray-700)] hover:text-[var(--color-primary)] transition-colors"
+                className="text-font-size-sm font-font-weight-medium text-muted-foreground hover:text-primary transition-colors"
               >
                 コンポーネント
               </a>
               <a
                 href="#tokens"
-                className="text-[var(--font-size-sm)] font-[var(--font-weight-medium)] text-[var(--color-gray-700)] hover:text-[var(--color-primary)] transition-colors"
+                className="text-font-size-sm font-font-weight-medium text-muted-foreground hover:text-primary transition-colors"
               >
                 デザイントークン
               </a>
               <a
                 href="#docs"
-                className="text-[var(--font-size-sm)] font-[var(--font-weight-medium)] text-[var(--color-gray-700)] hover:text-[var(--color-primary)] transition-colors"
+                className="text-font-size-sm font-font-weight-medium text-muted-foreground hover:text-primary transition-colors"
               >
                 ドキュメント
               </a>
             </nav>
           </div>
           
-          <div className="flex items-center space-x-[var(--spacing-4)]">
+          <div className="flex items-center space-x-spacing-md">
             <Button variant="outline" size="sm">
               GitHub
             </Button>
