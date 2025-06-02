@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -21,29 +22,31 @@ export function Header({ onMenuClick }: HeaderProps) {
         
         <div className="flex flex-1 items-center justify-between">
           <div className="flex items-center space-x-spacing-lg">
-            <h1 className="text-font-size-xl font-font-weight-bold text-primary">
-              デザインシステム v2
-            </h1>
+            <Link href="/">
+              <h1 className="text-font-size-xl font-font-weight-bold text-primary cursor-pointer">
+                デザインシステム v2
+              </h1>
+            </Link>
             
             <nav className="hidden md:flex items-center space-x-spacing-lg">
-              <a
-                href="#components"
+              <Link
+                href="/components"
                 className="text-font-size-sm font-font-weight-medium text-muted-foreground hover:text-primary transition-colors"
               >
                 コンポーネント
-              </a>
-              <a
+              </Link>
+              <Link
                 href="#tokens"
                 className="text-font-size-sm font-font-weight-medium text-muted-foreground hover:text-primary transition-colors"
               >
                 デザイントークン
-              </a>
-              <a
+              </Link>
+              <Link
                 href="#docs"
                 className="text-font-size-sm font-font-weight-medium text-muted-foreground hover:text-primary transition-colors"
               >
                 ドキュメント
-              </a>
+              </Link>
             </nav>
           </div>
           

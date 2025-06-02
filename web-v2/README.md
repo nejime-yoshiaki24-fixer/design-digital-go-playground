@@ -4,7 +4,7 @@
 
 ## 技術スタック
 
-- **Vite 6.3+** - 高速なビルドツール
+- **Next.js 15** - The React Framework（App Router）
 - **React 19** - UIライブラリ
 - **TypeScript 5.8+** - 型安全な開発
 - **Tailwind CSS v4** - ユーティリティファーストCSS
@@ -14,11 +14,12 @@
 ## 主な特徴
 
 - 🎨 デジタル庁デザイントークンを完全統合
-- ⚡ Viteによる高速な開発環境
+- ⚡ Next.js App Routerによる高速なルーティング
 - 🔒 TypeScriptによる型安全性
 - 🎯 CSS変数ベースのテーマシステム
 - ♿ アクセシビリティを重視した実装
 - 📱 レスポンシブデザイン対応
+- 🎭 専用コンポーネント展示ページ
 
 ## 開発を始める
 
@@ -26,20 +27,17 @@
 # 依存関係のインストール
 npm install
 
-# 開発サーバーの起動
+# 開発サーバーの起動（http://localhost:3000）
 npm run dev
-
-# Storybookの起動
-npm run storybook
 
 # プロダクションビルド
 npm run build
 
-# Storybookのビルド
-npm run build-storybook
+# プロダクションサーバーの起動
+npm start
 
-# ビルドのプレビュー
-npm run preview
+# Lintの実行
+npm run lint
 ```
 
 ### ルートディレクトリからの起動
@@ -47,15 +45,20 @@ npm run preview
 ```bash
 # アプリケーション開発サーバー
 npm run dev:v2
-
-# Storybook開発サーバー
-npm run dev:v2:storybook
 ```
 
 ## プロジェクト構造
 
 ```
 web-v2/
+├── app/                 # Next.js App Router
+│   ├── layout.tsx       # ルートレイアウト
+│   ├── page.tsx         # ホームページ
+│   └── components/      # コンポーネント展示ページ
+│       ├── page.tsx     # コンポーネント一覧
+│       ├── button/      # Buttonコンポーネント詳細
+│       ├── card/        # Cardコンポーネント詳細
+│       └── alert/       # Alertコンポーネント詳細
 ├── src/
 │   ├── components/      # UIコンポーネント
 │   │   ├── ui/         # 基本UIコンポーネント
@@ -64,11 +67,19 @@ web-v2/
 │   ├── styles/         # グローバルスタイル
 │   │   ├── design-tokens.css  # デザイントークン定義
 │   │   └── tailwind-theme.css # Tailwindテーマ設定
-│   ├── App.tsx         # メインアプリケーション
-│   └── main.tsx        # エントリーポイント
+│   └── global.css      # グローバルCSS
 ├── public/             # 静的ファイル
-└── vite.config.ts      # Vite設定
+├── next.config.mjs     # Next.js設定
+└── postcss.config.js   # PostCSS設定
 ```
+
+## ページ構成
+
+- `/` - ホームページ（デザインシステムの概要）
+- `/components` - コンポーネント一覧
+- `/components/button` - Buttonコンポーネントの詳細と使用例
+- `/components/card` - Cardコンポーネントの詳細と使用例
+- `/components/alert` - Alertコンポーネントの詳細と使用例
 
 ## デザイントークン
 

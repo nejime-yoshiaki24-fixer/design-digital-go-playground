@@ -1,10 +1,9 @@
-import './App.css'
 import { MainLayout } from '@/components/layout/main-layout'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { AlertWithIcon, AlertDescription } from '@/components/ui/alert'
 
-function App() {
+export default function HomePage() {
   return (
     <MainLayout>
       <div className="space-y-spacing-xl">
@@ -14,7 +13,7 @@ function App() {
             デジタル庁デザインシステム
           </h1>
           <p className="text-font-size-xl text-muted-foreground mb-spacing-xl">
-            Vite + React + TypeScript + Tailwind CSS v4 + shadcn/ui
+            Next.js App Router + TypeScript + Tailwind CSS v4 + shadcn/ui
           </p>
           <div className="flex justify-center gap-spacing-md">
             <Button size="lg">
@@ -43,7 +42,7 @@ function App() {
               <CardHeader>
                 <CardTitle>最新の技術スタック</CardTitle>
                 <CardDescription>
-                  Vite、React 19、TypeScript 5を使用した高速な開発環境
+                  Next.js 15、React 19、TypeScript 5を使用した高速な開発環境
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -101,5 +100,3 @@ function App() {
     </MainLayout>
   )
 }
-
-export default App
