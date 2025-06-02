@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils"
 import { AlertCircle, CheckCircle2, Info, XCircle } from "lucide-react"
 
 const alertVariants = cva(
-  "relative w-full rounded-radius-md border p-spacing-md [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
+  "relative w-full rounded-radius-lg border p-spacing-lg [&>svg~*]:pl-8 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-5 [&>svg]:top-5 [&>svg]:text-foreground",
   {
     variants: {
       variant: {
@@ -76,7 +76,7 @@ const AlertWithIcon = React.forwardRef<HTMLDivElement, AlertWithIconProps>(
     
     return (
       <Alert ref={ref} variant={variant} className={className} {...props}>
-        {icon && <Icon className="h-4 w-4" />}
+        {icon && <Icon className="h-5 w-5" />}
         {children}
       </Alert>
     )

@@ -258,6 +258,232 @@ body {
   animation: var(--animate-slide-up);
 }
 
+/* 追加のスペーシングクラス */
+.gap-spacing-xs {
+  gap: var(--spacing-xs);
+}
+
+.gap-spacing-sm {
+  gap: var(--spacing-sm);
+}
+
+.gap-spacing-md {
+  gap: var(--spacing-md);
+}
+
+.gap-spacing-lg {
+  gap: var(--spacing-lg);
+}
+
+.gap-spacing-xl {
+  gap: var(--spacing-xl);
+}
+
+.gap-spacing-2xl {
+  gap: var(--spacing-2xl);
+}
+
+.gap-spacing-3xl {
+  gap: var(--spacing-3xl);
+}
+
+.space-y-spacing-xs > * + * {
+  margin-top: var(--spacing-xs);
+}
+
+.space-y-spacing-sm > * + * {
+  margin-top: var(--spacing-sm);
+}
+
+.space-y-spacing-md > * + * {
+  margin-top: var(--spacing-md);
+}
+
+.space-y-spacing-lg > * + * {
+  margin-top: var(--spacing-lg);
+}
+
+.space-y-spacing-xl > * + * {
+  margin-top: var(--spacing-xl);
+}
+
+.space-y-spacing-2xl > * + * {
+  margin-top: var(--spacing-2xl);
+}
+
+.space-y-spacing-3xl > * + * {
+  margin-top: var(--spacing-3xl);
+}
+
+/* パディングクラス */
+.p-spacing-xs {
+  padding: var(--spacing-xs);
+}
+
+.p-spacing-sm {
+  padding: var(--spacing-sm);
+}
+
+.p-spacing-md {
+  padding: var(--spacing-md);
+}
+
+.p-spacing-lg {
+  padding: var(--spacing-lg);
+}
+
+.p-spacing-xl {
+  padding: var(--spacing-xl);
+}
+
+.p-spacing-2xl {
+  padding: var(--spacing-2xl);
+}
+
+.p-spacing-3xl {
+  padding: var(--spacing-3xl);
+}
+
+.px-spacing-md {
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
+}
+
+.px-spacing-lg {
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
+}
+
+.py-spacing-md {
+  padding-top: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+}
+
+.py-spacing-lg {
+  padding-top: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
+}
+
+.py-spacing-3xl {
+  padding-top: var(--spacing-3xl);
+  padding-bottom: var(--spacing-3xl);
+}
+
+.pb-spacing-md {
+  padding-bottom: var(--spacing-md);
+}
+
+.pb-spacing-sm {
+  padding-bottom: var(--spacing-sm);
+}
+
+.pb-spacing-lg {
+  padding-bottom: var(--spacing-lg);
+}
+
+.mb-spacing-sm {
+  margin-bottom: var(--spacing-sm);
+}
+
+.mb-spacing-md {
+  margin-bottom: var(--spacing-md);
+}
+
+.mb-spacing-lg {
+  margin-bottom: var(--spacing-lg);
+}
+
+.mb-spacing-xl {
+  margin-bottom: var(--spacing-xl);
+}
+
+/* シャドウクラス */
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+/* ボーダーラジウスクラス */
+.rounded-radius-sm {
+  border-radius: var(--border-radius-sm);
+}
+
+.rounded-radius-md {
+  border-radius: var(--border-radius-md);
+}
+
+.rounded-radius-lg {
+  border-radius: var(--border-radius-lg);
+}
+
+.rounded-radius-xl {
+  border-radius: var(--border-radius-xl);
+}
+
+.rounded-radius-2xl {
+  border-radius: var(--border-radius-2xl);
+}
+
+.rounded-radius-3xl {
+  border-radius: var(--border-radius-3xl);
+}
+
+.rounded-radius-full {
+  border-radius: var(--border-radius-full);
+}
+
+/* タイポグラフィクラス */
+.text-font-size-xs {
+  font-size: var(--font-size-xs);
+}
+
+.text-font-size-sm {
+  font-size: var(--font-size-sm);
+}
+
+.text-font-size-base {
+  font-size: var(--font-size-base);
+}
+
+.text-font-size-lg {
+  font-size: var(--font-size-lg);
+}
+
+.text-font-size-xl {
+  font-size: var(--font-size-xl);
+}
+
+.text-font-size-2xl {
+  font-size: var(--font-size-2xl);
+}
+
+.text-font-size-3xl {
+  font-size: var(--font-size-3xl);
+}
+
+.text-font-size-4xl {
+  font-size: var(--font-size-4xl);
+}
+
+.text-font-size-5xl {
+  font-size: var(--font-size-5xl);
+}
+
+.font-font-weight-normal {
+  font-weight: var(--font-weight-normal);
+}
+
+.font-font-weight-medium {
+  font-weight: var(--font-weight-medium);
+}
+
+.font-font-weight-semibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.font-font-weight-bold {
+  font-weight: var(--font-weight-bold);
+}
+
 .animate-slide-down {
   animation: var(--animate-slide-down);
 }
