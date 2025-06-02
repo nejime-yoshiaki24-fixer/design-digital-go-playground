@@ -1,0 +1,31 @@
+/* Tailwind v4 テーマ設定 */
+@theme {
+  /* カラーパレット */
+  --color-primary: var(--color-blue-900);
+  --color-secondary: var(--color-blue-1000);
+  
+  /* Tailwindカラーマッピング */
+  --color-blue-*: var(--color-blue-*);
+  --color-gray-*: var(--color-gray-*);
+  
+  /* セマンティックカラー */
+  --color-error: #D32F2F;
+  --color-warning: #FFC107;
+  --color-success: #4CAF50;
+  --color-info: #2196F3;
+  
+  /* カスタムスペーシング */
+  --spacing-*: var(--spacing-*);
+  
+  /* フォントサイズ */
+  --font-size-*: var(--font-size-*);
+  
+  /* シャドウ */
+  --shadow-*: var(--shadow-*);
+  
+  /* 角丸 */
+  --radius-*: var(--radius-*);
+  
+  /* トランジション */
+  --duration-*: var(--duration-*);
+}
