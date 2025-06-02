@@ -4,15 +4,15 @@ import { cn } from "@/lib/utils"
 import { AlertCircle, CheckCircle2, Info, XCircle } from "lucide-react"
 
 const alertVariants = cva(
-  "relative w-full rounded-radius-lg border p-spacing-lg [&>svg~*]:pl-8 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-5 [&>svg]:top-5 [&>svg]:text-foreground",
+  "relative w-full rounded-[12px] border-[3px] p-spacing-lg",
   {
     variants: {
       variant: {
-        default: "bg-background border-border text-foreground",
-        info: "bg-info/10 border-info text-info [&>svg]:text-info",
-        success: "bg-success/10 border-success text-success [&>svg]:text-success",
-        warning: "bg-warning/10 border-warning text-warning [&>svg]:text-warning",
-        error: "bg-error/10 border-error text-error [&>svg]:text-error",
+        default: "bg-white border-[#767676] text-[#333333]",
+        info: "bg-white border-[#0017C1] text-[#333333]",
+        success: "bg-white border-[#197A4B] text-[#333333]",
+        warning: "bg-white border-[#927200] text-[#333333]",
+        error: "bg-white border-[#EC0000] text-[#333333]",
       },
     },
     defaultVariants: {
@@ -40,7 +40,7 @@ const AlertTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h5
     ref={ref}
-    className={cn("mb-1 font-font-weight-semibold leading-none tracking-tight", className)}
+    className={cn("mb-spacing-sm font-font-weight-bold text-[20px] leading-[1.5em]", className)}
     {...props}
   />
 ))
@@ -52,7 +52,7 @@ const AlertDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("text-font-size-sm [&_p]:leading-relaxed", className)}
+    className={cn("text-[16px] leading-[1.7em] [&_p]:leading-[1.7em]", className)}
     {...props}
   />
 ))
@@ -76,8 +76,12 @@ const AlertWithIcon = React.forwardRef<HTMLDivElement, AlertWithIconProps>(
     
     return (
       <Alert ref={ref} variant={variant} className={className} {...props}>
-        {icon && <Icon className="h-5 w-5" />}
-        {children}
+        <div className="flex gap-spacing-lg">
+          {icon && <Icon className="h-9 w-9 flex-shrink-0" />}
+          <div className="flex-1">
+            {children}
+          </div>
+        </div>
       </Alert>
     )
   }

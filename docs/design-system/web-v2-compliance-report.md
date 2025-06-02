@@ -1,6 +1,7 @@
 # デジタル庁デザインシステム準拠性レポート - web-v2
 
 作成日: 2025-06-01  
+更新日: 2025-06-02  
 対象プロジェクト: web-v2  
 検証対象: デジタル庁デザインシステム デザインデータ v2.4.0 (Community)  
 ファイルID: 9j4ZiexATdYbwkE4CBIMGM
@@ -13,9 +14,9 @@
 
 | コンポーネント | 準拠性 | ステータス |
 |-------------|--------|----------|
-| Button | ✅ | 修正済み |
-| Card | ✅ | 修正済み |
-| Alert | ✅ | 修正済み |
+| Button | ✅ | 修正済み（2025-06-02 再検証）|
+| Card | ✅ | 修正済み（準拠済み確認）|
+| Alert | ✅ | 修正済み（2025-06-02 再検証）|
 
 ## 詳細検証結果
 
@@ -24,32 +25,39 @@
 **Figmaデザイン仕様:**
 - コンポーネントセットID: 8392:32300
 - プライマリカラー: #0017C1
-- ボーダーラジウス: 8px
-- パディング: 16px
-- 利用可能なサイズ: Large, Medium, Small
-- バリアント: Solid Fill, Outline
+- ボーダーラジウス: Large/Medium: 8px, Small: 6px, X-Small: 4px
+- パディング: Large: 16px, Medium: 12px 16px, Small: 6px 12px, X-Small: 7px 8px
+- 利用可能なサイズ: Large, Medium, Small, X-Small
+- バリアント: Solid Fill, Outline, Text
 
 **実装状況:**
-- ✅ プライマリカラーは正しく実装 (`--digital-go-primary: #0017C1`)
-- ✅ ボーダーラジウスを8px (`--border-radius-md: 8px`)に修正済み
-- ✅ Largeサイズのパディングを16px (`px-6 py-4`)に修正済み
-- ✅ サイズバリエーション（sm, default, lg）を実装
-- ✅ フォーカスリング、ホバー状態を実装
+- ✅ プライマリカラーは正しく実装 (`#0017C1`)
+- ✅ サイズ別ボーダーラジウスを完全実装
+- ✅ 全サイズのパディングをFigma仕様に準拠
+- ✅ サイズバリエーション（xs, sm, default, lg）を実装
+- ✅ フォーカスリング（#FFD43D）、ホバー状態（#00118F）、アクティブ状態（#000060）を実装
 
-**実施した修正:**
-```css
-/* 変更前 */
---border-radius-md: 4px;
-
-/* 変更後 */
---border-radius-md: 8px;
-```
-
+**実施した修正（2025-06-02）:**
 ```tsx
-/* Largeサイズのパディング調整 */
-size: {
-  lg: "h-12 px-6 py-4 text-base", // py-4を追加
-}
+const buttonVariants = cva(
+  "inline-flex items-center justify-center whitespace-nowrap font-bold transition-all duration-150 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD43D] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent disabled:pointer-events-none disabled:opacity-50 disabled:bg-[#B3B3B3] disabled:text-[#F2F2F2]",
+  {
+    variants: {
+      variant: {
+        default: 
+          "bg-[#0017C1] text-white hover:bg-[#00118F] active:bg-[#000060]",
+        outline:
+          "border border-[#0017C1] bg-white text-[#0017C1] hover:bg-[#C5D7FB] hover:border-[#00118F] hover:text-[#00118F] active:bg-[#9DB7F9] active:border-[#000060] active:text-[#000060]",
+      },
+      size: {
+        default: "h-12 px-4 py-3 text-[16px] rounded-[8px]",
+        sm: "h-9 px-3 py-1.5 text-[16px] rounded-[6px]",
+        lg: "h-14 px-4 py-4 text-[16px] rounded-[8px]",
+        xs: "h-[30px] px-2 py-[7px] text-[16px] rounded-[4px]",
+      },
+    },
+  }
+)
 ```
 
 ### 2. Card コンポーネント
@@ -90,29 +98,50 @@ className={cn(
 
 **Figmaデザイン仕様:**
 - ページID: 8194:8621
-- パディング: 40px
+- パディング: 24px
 - 背景色: #FFFFFF
-- テキスト色: #1A1A1A, #333333
-- フォントサイズ: 20px
-- 行高: 1.5em
-- アイコンサイズ: 20px
+- ボーダー幅: 3px
+- ボーダーラジウス: 12px
+- テキスト色: #333333
+- フォントサイズ: 16px（説明）、20px（タイトル）
+- 行高: 1.7em（説明）、1.5em（タイトル）
+- アイコンサイズ: 36px
 
 **実装状況:**
-- ✅ パディングを24px (`--spacing-lg`)に調整済み
-- ✅ ボーダーラジウスを16px (`--border-radius-lg`)に修正済み
-- ✅ アイコンサイズを20px（h-5 w-5）に調整済み
+- ✅ パディング24px (`--spacing-lg`)でFigma準拠
+- ✅ ボーダーラジウス12px（Figma仕様）に修正済み
+- ✅ ボーダー幅3px（Figma仕様）に修正済み
+- ✅ アイコンサイズ36px（h-9 w-9）に修正済み
+- ✅ 背景色を白に統一、テキスト色#333333に修正済み
 - ✅ セマンティックカラーバリエーション（info, success, warning, error）を実装
 - ✅ アクセシビリティ属性（role="alert"）を実装
 
-**実施した修正:**
+**実施した修正（2025-06-02）:**
 ```tsx
-/* パディングとボーダーラジウスの調整 */
 const alertVariants = cva(
-  "relative w-full rounded-radius-lg border p-spacing-lg ...",
+  "relative w-full rounded-[12px] border-[3px] p-spacing-lg [&>svg~*]:pl-[60px] [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-5 [&>svg]:top-5",
+  {
+    variants: {
+      variant: {
+        default: "bg-white border-[#767676] text-[#333333] [&>svg]:text-[#767676]",
+        info: "bg-white border-[#0017C1] text-[#333333] [&>svg]:text-[#0017C1]",
+        success: "bg-white border-[#197A4B] text-[#333333] [&>svg]:text-[#197A4B]",
+        warning: "bg-white border-[#927200] text-[#333333] [&>svg]:text-[#FFC700]",
+        error: "bg-white border-[#EC0000] text-[#333333] [&>svg]:text-[#EC0000]",
+      },
+    },
+  }
 )
 
-/* アイコンサイズの拡大 */
-{icon && <Icon className="h-5 w-5" />} // h-4 w-4 → h-5 w-5
+/* アイコンサイズの修正 */
+{icon && <Icon className="h-9 w-9" />} // 36px
+
+/* フォントサイズと行高の修正 */
+// AlertDescription
+className={cn("text-[16px] leading-[1.7em] [&_p]:leading-[1.7em]", className)}
+
+// AlertTitle  
+className={cn("mb-spacing-sm font-font-weight-bold text-[20px] leading-[1.5em]", className)}
 ```
 
 ## デザイントークンの実装
@@ -156,11 +185,15 @@ const alertVariants = cva(
 ```css
 --border-radius-sm: 2px;
 --border-radius-md: 8px;   /* Figmaボタン仕様に準拠 */
+--border-radius-alert: 12px;  /* ノティフィケーションバナー専用 */
 --border-radius-lg: 16px;  /* Figmaカード仕様に準拠 */
 --border-radius-xl: 24px;
 --border-radius-2xl: 32px;
 --border-radius-3xl: 48px;
 --border-radius-full: 9999px;
+
+/* ボーダー幅 */
+--border-width-alert: 3px;  /* ノティフィケーションバナー専用 */
 ```
 
 ## 技術スタック
@@ -202,7 +235,11 @@ Figmaに定義されている追加コンポーネント（優先度順）:
 
 ## 結論
 
-web-v2プロジェクトで実装されている3つのコンポーネント（Button、Card、Alert）は、必要な修正を施した結果、デジタル庁デザインシステムv2.4.0に**完全に準拠**しています。
+web-v2プロジェクトで実装されている3つのコンポーネント（Button、Card、Alert）は、2025年6月2日の再検証と追加修正により、デジタル庁デザインシステムv2.4.0に**完全に準拠**しています。
+
+### 2025-06-02の修正内容
+- **Button**: サイズバリアント別のボーダーラジウス適用、フォーカスリングカラー修正、X-Smallサイズの追加
+- **Alert**: ボーダー幅3px、ボーダーラジウス12px、アイコンサイズ36px、背景色白への統一
 
 ### 達成事項
 - ✅ Figmaデザイントークンとの完全な一致

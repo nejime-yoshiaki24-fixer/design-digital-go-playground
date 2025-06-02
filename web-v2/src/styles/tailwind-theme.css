@@ -87,11 +87,15 @@
   --border-radius-none: 0;
   --border-radius-sm: 2px;
   --border-radius-md: 8px;
+  --border-radius-alert: 12px;  /* ノティフィケーションバナー専用 */
   --border-radius-lg: 16px;
   --border-radius-xl: 24px;
   --border-radius-2xl: 32px;
   --border-radius-3xl: 48px;
   --border-radius-full: 9999px;
+  
+  /* ボーダー幅 */
+  --border-width-alert: 3px;  /* ノティフィケーションバナー専用 */
   
   /* トランジション */
   --transition-none: none;
