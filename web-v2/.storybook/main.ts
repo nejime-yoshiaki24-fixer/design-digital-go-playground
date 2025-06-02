@@ -1,28 +1,19 @@
-import type { StorybookConfig } from '@storybook/react-vite';
-import { mergeConfig } from 'vite';
+import type { StorybookConfig } from '@storybook/react-vite'
 
 const config: StorybookConfig = {
-  stories: [
-    "../src/**/*.mdx",
-    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
-  ],
+  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
   addons: [
     '@storybook/addon-onboarding',
-    '@storybook/addon-docs'
+    '@storybook/addon-docs',
   ],
   framework: {
     name: '@storybook/react-vite',
-    options: {}
-  },
-  docs: {
-    autodocs: "tag",
+    options: {},
   },
   viteFinal: async (config) => {
-    return mergeConfig(config, {
-      optimizeDeps: {
-        include: ['@storybook/react-vite'],
-      },
-    });
+    // Tailwind CSS v4の設定を確実に含める
+    return config
   },
-};
-export default config;
+}
+
+export default config
