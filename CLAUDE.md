@@ -9,6 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 重要なアーキテクチャ変更
 
 **2024年後期**: プロジェクトをquick-data-mcpパターンに基づいて大幅にリファクタリング
+
 - 複雑な階層構造を`mcp-server/src/main.ts`に統合
 - Tools, Resources, Promptsの3要素を単一ファイルで実装
 - webプロジェクトを別リポジトリに分離、MCPサーバー専用化
@@ -16,6 +17,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## コマンド
 
 ### 基本開発フロー
+
 ```bash
 # セットアップ
 npm install
@@ -37,6 +39,7 @@ cd mcp-server && npm run inspector
 ```
 
 ### 個別コマンド
+
 ```bash
 # TypeScript型チェック
 npm run typecheck
@@ -99,16 +102,19 @@ design-system-mcp-playground/
 ## デザイントークン標準
 
 ### 承認済みカラー
+
 - **プライマリ**: `#0017C1`（デジタル庁ブルー）
 - **グレースケール**: `#1A1A1C`, `#595959`, `#767676`, `#D9D9D9`, `#F0F0F0`, `#FFFFFF`
 - **セマンティック**: `#D32F2F`(エラー), `#FFC107`(警告), `#4CAF50`(成功)
 
 ### スペーシング
+
 - **xs**: `4px`, **sm**: `8px`, **md**: `16px`, **lg**: `24px`, **xl**: `32px`
 
 ## 重要な開発パターン
 
 ### MCP検証ワークフロー
+
 ```bash
 # 1. 機能追加・修正
 # main.tsを編集
@@ -127,6 +133,7 @@ cd mcp-server && npm run inspector
 ```
 
 ### ファイル構造の制約
+
 - **単一エントリーポイント**: すべての機能は`src/main.ts`に実装
 - **ユニットテスト**: `tests/main.test.ts`で基本機能テスト  
 - **統合テスト**: `tests/integration.test.ts`でMCP接続テスト
@@ -137,39 +144,47 @@ cd mcp-server && npm run inspector
 統合テストでは以下の機能を包括的にテストします：
 
 **サーバー接続**
+
 - MCPサーバーへの実際の接続確立
 - 接続安定性の検証
 
 **Resources（21個のテスト）**
+
 - `design-tokens://all` - 全デザイントークンの取得
 - `design-tokens://colors` - カラートークンの取得  
 - `design-tokens://spacing` - スペーシング設定の取得
 
 **Tools**
+
 - `validate_design_tokens` - CSS準拠性検証の実行
 - `analyze_component_structure` - コンポーネント構造分析の実行
 
 **Prompts**
+
 - `design_system_review` - レビューワークフローの取得
 - `component_audit` - 監査ワークフローの取得
 
 **エラーハンドリング**
+
 - 無効なリソースURIの処理
 - 無効なツール名の処理
 - 無効なプロンプト名の処理
 
 **パフォーマンス**
+
 - 複数同時リクエストの処理
 - 接続の安定性確認
 
 ## 参考リソース
 
 ### quick-data-mcp学習
+
 - `quick-data-mcp/` - 参考実装（Python版）
 - MCP 3要素統合パターンの実例
 - プロンプト駆動ワークフローの設計例
 
 ### ドキュメント
+
 - `docs/design-system/` - デザインシステム仕様
 - `docs/components/` - コンポーネント設計指針  
 - `docs/design-system/research/mcp-server-architecture.md` - アーキテクチャ詳細
@@ -177,11 +192,13 @@ cd mcp-server && npm run inspector
 ## トラブルシューティング
 
 ### よくある問題
+
 1. **デザイントークンパスエラー**: `design-tokens/tokens.json`の存在確認
 2. **MCP接続エラー**: `npm run inspector`で接続テスト
 3. **型エラー**: `npm run typecheck`で詳細確認
 
 ### 開発時の注意点
+
 - 機能追加時は`main.ts`の該当セクション（Tools/Resources/Prompts）を編集
 - テスト追加時は`tests/main.test.ts`を更新
 - プロンプト機能を積極活用してワークフロー効率化を図る

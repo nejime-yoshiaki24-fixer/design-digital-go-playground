@@ -61,3 +61,4 @@ bin/
 # Web projects (moved to separate repositories)
 /web/
 /web-v2/
+quick-data-mcp/
