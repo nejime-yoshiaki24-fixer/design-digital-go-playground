@@ -2,29 +2,23 @@
   "name": "design-system-mcp-playground",
   "version": "1.0.0",
   "private": true,
-  "description": "デジタル庁デザインシステム準拠のUIコンポーネントライブラリとMCPサーバー",
+  "description": "デジタル庁デザインシステム準拠のMCPサーバー",
   "workspaces": [
-    "web",
     "mcp-server"
   ],
   "scripts": {
-    "dev:components": "npm run start -w @design-system-mcp/components",
-    "dev:storybook": "npm run storybook -w @design-system-mcp/components",
-    "dev:mcp": "cd mcp-server && npm run dev",
-    "dev:v2": "cd web-v2 && npm run dev",
-    "dev:v2:storybook": "cd web-v2 && npm run storybook",
-    "build:components": "npm run build -w @design-system-mcp/components",
-    "build:v2": "cd web-v2 && npm run build",
-    "build:v2:storybook": "cd web-v2 && npm run build-storybook",
-    "test:components": "npm test -w @design-system-mcp/components",
-    "test:visual": "npm run test:visual -w @design-system-mcp/components",
-    "test:mcp": "cd mcp-server && npm test",
-    "clean": "rm -rf packages/*/node_modules packages/*/build packages/*/dist",
-    "install:all": "npm install && cd web-v2 && npm install",
+    "dev": "cd mcp-server && npm run dev",
+    "build": "cd mcp-server && npm run build",
+    "test": "cd mcp-server && npm test",
+    "typecheck": "cd mcp-server && npm run typecheck",
+    "lint": "cd mcp-server && npm run lint",
+    "format": "cd mcp-server && npm run format",
     "sync:tokens": "node scripts/sync-tokens-from-figma.js"
   },
   "devDependencies": {
-    "lerna": "^8.1.2"
+    "lerna": "^8.1.2",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.12"
   },
   "engines": {
     "node": ">=18.0.0",

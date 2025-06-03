@@ -1,76 +1,50 @@
-# デジタル庁デザインシステム準拠UIコンポーネントライブラリ
+# デジタル庁デザインシステムMCPサーバー
 
-このプロジェクトは、デジタル庁デザインシステムに準拠したReactコンポーネントライブラリとMCPサーバーを提供するモノレポジトリです。
+このプロジェクトは、デジタル庁デザインシステムの検証と分析を行うModel Context Protocol (MCP)サーバーを提供します。
 
 ## 🗂 プロジェクト構造
 
 ```
 design-system-mcp-playground/
-├── web/               # Reactウェブサイト（旧components）
 ├── mcp-server/        # Model Context Protocolサーバー
+├── design-tokens/     # デザイントークン定義
 ├── docs/              # プロジェクトドキュメント
-├── .claude/           # Claude Code設定
+├── scripts/           # ユーティリティスクリプト
 └── .github/           # GitHub Actions CI/CD
 ```
 
 ## 🚀 クイックスタート
 
-### 全体のセットアップ
-
 ```bash
 # 依存関係のインストール
-npm run install:all
-```
+npm install
 
-### コンポーネントライブラリ
-
-```bash
 # 開発サーバー起動
-npm run dev:components
-
-# Storybook起動
-npm run dev:storybook
+npm run dev
 
 # テスト実行
-npm run test:components
+npm run test
 
-# ビジュアルリグレッションテスト
-npm run test:visual
+# ビルド
+npm run build
 ```
 
-### MCPサーバー
+## 📦 MCPサーバーの機能
 
-```bash
-# サーバー起動
-npm run dev:mcp
+### リソース提供
 
-# テスト実行
-npm run test:mcp
-```
+- `design-tokens://all` - 全デザイントークン
+- `design-tokens://colors` - カラートークン
+- `design-tokens://spacing` - スペーシング
+- `design-tokens://typography` - タイポグラフィ
+- `design-tokens://elevation` - エレベーション
+- `design-tokens://layout` - レイアウト
 
-## 📦 パッケージ
+### 検証ツール
 
-### web
-
-デジタル庁デザインシステムに準拠したReactウェブサイト。
-
-- **Button**: プライマリ、セカンダリ、アウトライン
-- **Checkbox**: 基本、エラー、無効状態
-- **Divider**: 実線、破線、太線
-- **Accordion**: 折りたたみ可能なコンテンツ
-- **Icons**: システムアイコンセット
-- **Table**: ソート、フィルタリング、ページネーション対応
-
-[Storybookデモ](https://napnel.github.io/design-system-mcp-playground/)
-
-### mcp-server
-
-Figma連携と品質管理を提供するModel Context Protocolサーバー。
-
-- デザイントークン同期
-- コンポーネント品質チェック
-- アクセシビリティ検証
-- 自動コンポーネント生成
+- `validate_design_tokens` - CSSのデザイントークン準拠性検証
+- `analyze_component_structure` - コンポーネント構造分析
+- `validate_accessibility` - アクセシビリティチェック
 
 ## 🛠 開発
 
@@ -83,20 +57,21 @@ Figma連携と品質管理を提供するModel Context Protocolサーバー。
 
 ```bash
 # 開発
-npm run dev:components    # React開発サーバー
-npm run dev:storybook     # Storybook
-npm run dev:mcp          # MCPサーバー
+npm run dev             # MCPサーバー開発モード
 
 # ビルド
-npm run build:components  # 本番ビルド
+npm run build           # 本番ビルド
 
 # テスト
-npm run test:components   # Jestテスト
-npm run test:visual      # ビジュアルテスト
-npm run test:mcp         # Pythonテスト
+npm run test            # テスト実行
 
-# クリーンアップ
-npm run clean            # ビルド成果物削除
+# 品質チェック
+npm run typecheck       # TypeScript型チェック
+npm run lint            # リンティング
+npm run format          # コードフォーマット
+
+# その他
+npm run sync:tokens     # デザイントークン同期
 ```
 
 ## 📚 ドキュメント

@@ -1,0 +1,16 @@
+{
+  "web-v2/**/*.{js,jsx,ts,tsx}": [
+    "prettier --write",
+    "bash -c 'cd web-v2 && npm run lint -- --fix'",
+    "bash -c 'cd web-v2 && npm run typecheck'"
+  ],
+  "web-v2/**/*.{json,md,css}": [
+    "prettier --write"
+  ],
+  "web/**/*.{js,jsx,ts,tsx}": [
+    "prettier --write"
+  ],
+  "mcp-server/**/*.{js,ts}": [
+    "prettier --write"
+  ]
+}
