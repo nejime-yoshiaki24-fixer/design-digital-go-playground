@@ -5,14 +5,18 @@
   "private": true,
   "type": "module",
   "bin": {
-    "design-system-validator": "./dist/index.js"
+    "design-system-validator": "./dist/main.js"
   },
   "scripts": {
     "build": "tsc",
-    "dev": "tsx watch src/index.ts",
-    "start": "node dist/index.js",
-    "inspector": "npm run build && npx @modelcontextprotocol/inspector dist/index.js",
+    "dev": "tsx watch src/main.ts",
+    "start": "node dist/main.js",
+    "inspector": "npm run build && npx @modelcontextprotocol/inspector node dist/main.js",
+    "inspector-dev": "npx @modelcontextprotocol/inspector tsx src/main.ts",
     "test": "NODE_OPTIONS='--experimental-vm-modules' jest",
+    "test:unit": "NODE_OPTIONS='--experimental-vm-modules' jest tests/main.test.ts",
+    "test:integration": "NODE_OPTIONS='--experimental-vm-modules' jest tests/integration.test.ts --runInBand",
+    "test:all": "NODE_OPTIONS='--experimental-vm-modules' jest --runInBand",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --ext .ts",
     "format": "prettier --write \"src/**/*.ts\""
