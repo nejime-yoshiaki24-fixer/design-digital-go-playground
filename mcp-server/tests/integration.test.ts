@@ -30,7 +30,12 @@ describe('MCP Server Integration Tests', () => {
     
     transport = new StdioClientTransport({
       command: 'node',
-      args: [serverPath]
+      args: [serverPath],
+      env: {
+        ...process.env,
+        // テスト環境用のパス許可設定
+        ALLOWED_PATHS: `${tmpdir()},${process.cwd()},/tmp,/test`
+      }
     });
 
     client = new Client({
@@ -320,17 +325,21 @@ describe('MCP Server Integration Tests', () => {
     });
 
     test('should handle invalid component path in analyze_component_structure', async () => {
+      // 許可されたパス内で存在しないパスを使用
+      const invalidPath = join(tmpdir(), 'non-existent-component');
+      
       const result = await client.callTool({
         name: 'analyze_component_structure',
         arguments: {
-          component_path: '/non/existent/path'
+          component_path: invalidPath
         }
       });
 
       expect(result).toBeDefined();
       expect(result.isError).toBe(true);
       const content = (result.content as any[])[0];
-      expect(content.text).toContain("Component path '/non/existent/path' not found");
+      const errorResult = JSON.parse(content.text);
+      expect(errorResult.error).toContain("見つかりません");
     });
   });
 
