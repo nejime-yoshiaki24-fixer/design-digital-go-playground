@@ -66,7 +66,7 @@ npm run sync:tokens
 
 ```
 design-system-mcp-playground/
-├── mcp-server/           # MCPサーバー（メイン実装）
+├── da-design-mcp/       # MCPサーバー（メイン実装）
 │   ├── src/main.ts      # 全機能統合ファイル（quick-data-mcpパターン）
 │   └── tests/main.test.ts
 ├── design-tokens/       # デザイントークン定義
@@ -126,7 +126,7 @@ npm run typecheck && npm run lint && npm run test:all
 npm run test:integration
 
 # 4. MCP動作確認
-cd mcp-server && npm run inspector
+cd da-design-mcp && npm run inspector
 
 # 5. プロンプトワークフロー活用
 # design_system_review や component_audit を使用

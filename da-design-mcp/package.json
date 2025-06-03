@@ -2,7 +2,19 @@
   "name": "@design-system-mcp/validator",
   "version": "1.0.0",
   "description": "Design System Validator MCP Server - デジタル庁デザインシステム検証ツール",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/YOUR_REPO.git"
+  },
+  "keywords": [
+    "mcp",
+    "design-system",
+    "digital-agency",
+    "validator",
+    "typescript"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
   "type": "module",
   "bin": {
     "design-system-validator": "./dist/main.js"

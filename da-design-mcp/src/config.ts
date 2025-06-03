@@ -24,7 +24,7 @@ export class ConfigManager {
     
     return {
       tokensPath: process.env.DESIGN_TOKENS_PATH || 
-                  join(currentDir, "../../design-tokens/tokens.json"),
+                  join(currentDir, "./data/tokens.json"),
       logLevel: process.env.LOG_LEVEL || "INFO",
       allowedPaths: process.env.ALLOWED_PATHS?.split(',').map(p => p.trim()) || [],
       maxFileSize: parseInt(process.env.MAX_FILE_SIZE || "100000"), // 100KB default

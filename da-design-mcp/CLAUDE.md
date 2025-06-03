@@ -19,7 +19,7 @@ quick-data-mcpの実践的設計パターンを参考に、モジュラー構造
 ### ファイル構造
 
 ```
-mcp-server/
+da-design-mcp/
 ├── src/
 │   ├── main.ts              # エントリーポイント（サーバー初期化）
 │   ├── config.ts            # 設定管理（シングルトン）

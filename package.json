@@ -4,15 +4,15 @@
   "private": true,
   "description": "デジタル庁デザインシステム準拠のMCPサーバー",
   "workspaces": [
-    "mcp-server"
+    "da-design-mcp"
   ],
   "scripts": {
-    "dev": "cd mcp-server && npm run dev",
-    "build": "cd mcp-server && npm run build",
-    "test": "cd mcp-server && npm test",
-    "typecheck": "cd mcp-server && npm run typecheck",
-    "lint": "cd mcp-server && npm run lint",
-    "format": "cd mcp-server && npm run format",
+    "dev": "cd da-design-mcp && npm run dev",
+    "build": "cd da-design-mcp && npm run build",
+    "test": "cd da-design-mcp && npm test",
+    "typecheck": "cd da-design-mcp && npm run typecheck",
+    "lint": "cd da-design-mcp && npm run lint",
+    "format": "cd da-design-mcp && npm run format",
     "sync:tokens": "node scripts/sync-tokens-from-figma.js"
   },
   "devDependencies": {

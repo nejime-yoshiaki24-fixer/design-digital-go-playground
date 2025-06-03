@@ -1,0 +1,35 @@
+# ソースファイル（ビルド成果物のみ公開したい場合）
+# src/
+# tests/
+
+# 開発用ファイル
+.eslintrc.json
+jest.config.js
+tsconfig.json
+*.test.ts
+*.spec.ts
+
+# ローカルファイル
+.env
+.env.local
+*.log
+node_modules/
+
+# エディタファイル
+.vscode/
+.idea/
+
+# テスト関連
+coverage/
+.nyc_output/
+
+# 一時ファイル
+*.tmp
+test.css
+
+# Git関連
+.git/
+.gitignore
+
+# CI/CD
+.github/
