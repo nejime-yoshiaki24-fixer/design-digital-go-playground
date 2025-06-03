@@ -57,3 +57,7 @@ bin/
 
 .mcp.json
 .env
+
+# Web projects (moved to separate repositories)
+/web/
+/web-v2/

@@ -1,0 +1,8 @@
+{
+  "web-v2/**/*.{js,jsx,ts,tsx}": [
+    "prettier --write"
+  ],
+  "web-v2/**/*.{json,md,css}": [
+    "prettier --write"
+  ]
+}

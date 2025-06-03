@@ -5,16 +5,19 @@
 ## web-v2ディレクトリ
 
 ### コアフレームワーク
+
 - **Vite 6.3+**: 高速なビルドツール。開発サーバーの起動とHMRが高速
 - **React 19**: 最新のReactでConcurrent Featuresをサポート
 - **TypeScript 5.8+**: 型安全な開発環境
 
 ### スタイリング
+
 - **Tailwind CSS 4.0**: ユーティリティファーストCSS（現在、従来のCSSアプローチで実装）
 - **@tailwindcss/vite**: Tailwind CSS v4のVite統合（現在無効化中）
 - **@tailwindcss/postcss**: PostCSS経由でのTailwind CSS処理
 
 ### UIライブラリ
+
 - **shadcn/ui**: カスタマイズ可能なReactコンポーネント
 - **lucide-react**: アイコンライブラリ
 - **class-variance-authority (CVA)**: コンポーネントバリアント管理
@@ -22,6 +25,7 @@
 - **tailwind-merge**: Tailwindクラスの競合解決
 
 ### 開発ツール
+
 - **Storybook 9**: コンポーネントのドキュメント化とテスト
 - **ESLint**: コード品質チェック
 - **PostCSS**: CSS処理パイプライン
@@ -30,31 +34,37 @@
 ## web ディレクトリ
 
 ### コアフレームワーク
+
 - **Create React App**: Reactアプリケーションのボイラープレート
 - **React 18**: 安定版のReact
 - **TypeScript 4.9+**: 型安全な開発
 
 ### テスティング
+
 - **Jest**: ユニットテストフレームワーク
 - **@testing-library/react**: Reactコンポーネントのテスト
 - **Playwright**: E2Eテストとビジュアルリグレッションテスト
 
 ### 開発ツール
+
 - **Storybook 7**: コンポーネントカタログ
 - **react-scripts**: CRAのビルドスクリプト
 
 ## mcp-server ディレクトリ
 
 ### MCPフレームワーク
+
 - **@modelcontextprotocol/sdk**: Model Context Protocol SDK
 - **zod**: スキーマ検証とバリデーション
 
 ### ビルドツール
+
 - **TypeScript 5.6+**: 型安全な開発
 - **tsx**: TypeScriptの直接実行
 - **esbuild**: 高速なバンドラー
 
 ### テスティング
+
 - **Jest**: ユニットテストフレームワーク
 - **@types/jest**: Jestの型定義
 

@@ -4,55 +4,34 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## プロジェクト概要
 
-このプロジェクトは、デジタル庁デザインシステムに準拠したReactウェブサイトとMCPサーバーを提供します。
+このプロジェクトは、デジタル庁デザインシステムに準拠したMCPサーバーを提供します。
 
 ## コマンド
 
 ### 開発サーバー
 
 ```bash
-# コンポーネント開発サーバー
-npm run dev:components
-
-# Storybook開発サーバー
-npm run dev:storybook
-
 # MCPサーバー開発モード
-npm run dev:mcp
+npm run dev
 ```
 
 ### テスト
 
 ```bash
-# コンポーネントテスト
-npm run test:components
-
-# ビジュアルリグレッションテスト
-npm run test:visual
-
 # MCPサーバーテスト
-npm run test:mcp
-
-# ビジュアルテスト基準画像更新
-npm run test:visual:update
+npm run test
 ```
 
 ### ビルド
 
 ```bash
-# コンポーネントライブラリビルド
-npm run build:components
-
-# MCPサーバービルド（mcp-serverディレクトリ内で）
+# MCPサーバービルド
 npm run build
 ```
 
 ### 品質チェック
 
 ```bash
-# MCPサーバー内で実行するコマンド
-cd packages/mcp-server
-
 # TypeScript型チェック
 npm run typecheck
 
@@ -66,22 +45,13 @@ npm run format
 ### セットアップ
 
 ```bash
-# 全パッケージのインストール
-npm run install:all
-
-# クリーンアップ
-npm run clean
+# パッケージのインストール
+npm install
 ```
 
 ## アーキテクチャ
 
 ### プロジェクト構成
-
-- **web/**: React ウェブサイト
-  - Create React App + TypeScript
-  - Storybook
-  - Playwright(ビジュアルリグレッションテスト)
-  - Jest(ユニットテスト)
 
 - **mcp-server/**: デザインシステム検証MCPサーバー
   - TypeScript + Node.js
@@ -126,26 +96,11 @@ npm run clean
 
 ## 開発フロー
 
-### ウェブサイト開発
-
-1. `npm run dev:storybook`でStorybookを起動
-2. `web/src/components/`に新しいコンポーネントを作成
-3. Storiesファイル(`.stories.tsx`)でコンポーネントを文書化
-4. Jestでユニットテスト(`.test.tsx`)を作成
-5. `npm run test:visual`でビジュアルテストを実行
-
-### 重要な制約
-
-- 新しいコンポーネントは必ずデジタル庁デザインシステムの承認済みトークンを使用
-- CSS-in-JSは使用せず、専用CSSファイルでスタイリング
-- すべてのコンポーネントにStorybookストーリーとビジュアルテストが必要
-- アクセシビリティ要件(WCAG 2.1 AA準拠)を満たす実装
-
 ### MCPサーバー開発
 
 1. `mcp-server/src/tools/`に新しい検証ツールを実装
-2. `cd mcp-server && npm run typecheck && npm run lint && npm test`で品質チェック
-3. `npm run dev:mcp`で動作確認
+2. `npm run typecheck && npm run lint && npm test`で品質チェック
+3. `npm run dev`で動作確認
 4. MCPインスペクターでプロトコル検証
 
 ## 環境要件
