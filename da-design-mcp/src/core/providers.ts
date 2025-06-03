@@ -1,5 +1,5 @@
 import { readFileSync, readdirSync } from "fs";
-import { DesignTokens } from "../types.js";
+import { DesignTokens, ColorToken, TypographyToken, GridToken } from "../types.js";
 import { ConfigManager } from "../config.js";
 
 // ===== Design Token Provider =====
@@ -29,17 +29,16 @@ export class DesignTokensProvider {
 
   private initializeValidationSets(): void {
     this.validColors = this.collectColorValues(this.tokens.colors);
-    this.validSpacing = new Set(Object.values(this.tokens.spacing));
+    this.validSpacing = new Set(Object.values(this.tokens.spacing || {}));
   }
 
-  private collectColorValues(obj: unknown, values: Set<string> = new Set()): Set<string> {
-    if (!obj || typeof obj !== "object") return values;
-    for (const key in obj as Record<string, unknown>) {
-      const value = (obj as Record<string, unknown>)[key];
-      if (typeof value === "string" && value.startsWith("#")) {
-        values.add(value.toUpperCase());
-      } else if (typeof value === "object" && value !== null) {
-        this.collectColorValues(value, values);
+  private collectColorValues(colorObj: Record<string, ColorToken>, values: Set<string> = new Set()): Set<string> {
+    for (const colorValue of Object.values(colorObj)) {
+      if (typeof colorValue === "string" && colorValue.startsWith("#")) {
+        values.add(colorValue.toUpperCase());
+      } else if (typeof colorValue === "object" && colorValue !== null) {
+        // Recursively collect from nested color objects
+        this.collectColorValues(colorValue as Record<string, ColorToken>, values);
       }
     }
     return values;
@@ -49,32 +48,32 @@ export class DesignTokensProvider {
     return this.tokens;
   }
 
-  getColors() {
+  getColors(): Record<string, ColorToken> {
     return this.tokens.colors;
   }
 
-  getSpacing() {
-    return this.tokens.spacing;
+  getSpacing(): Record<string, string> {
+    return this.tokens.spacing || {};
   }
 
-  getTypography() {
-    return this.tokens.typography;
+  getTypography(): Record<string, TypographyToken> {
+    return this.tokens.typography || {};
   }
 
-  getElevation() {
-    return this.tokens.elevation;
+  getElevation(): Record<string, string> {
+    return this.tokens.elevation || {};
   }
 
-  getBorderRadius() {
-    return this.tokens.borderRadius;
+  getBorderRadius(): Record<string, string> {
+    return this.tokens.borderRadius || {};
   }
 
-  getBreakpoints() {
-    return this.tokens.breakpoints;
+  getBreakpoints(): Record<string, string> {
+    return this.tokens.breakpoints || {};
   }
 
-  getGrid() {
-    return this.tokens.grid;
+  getGrid(): Record<string, GridToken> {
+    return this.tokens.grid || {};
   }
 
   getValidColors(): Set<string> {

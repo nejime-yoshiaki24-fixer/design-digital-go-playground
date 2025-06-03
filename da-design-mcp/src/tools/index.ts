@@ -3,6 +3,11 @@ import { existsSync, promises as fs } from "fs";
 import { DesignSystemErrorHandler, Logger } from "../core/utils.js";
 import { DesignTokenValidator, ComponentAnalyzer } from "../core/providers.js";
 import { ConfigManager } from "../config.js";
+import { HealthStatus, HealthCheckResult } from "../types.js";
+
+// ===== Constants =====
+const MEMORY_WARNING_THRESHOLD_MB = 100;
+const BYTES_TO_MB = 1024 * 1024;
 
 // ===== Design Token Validation Tool =====
 export function createValidateDesignTokensTool(
@@ -157,12 +162,12 @@ export function createHealthCheckTool(
 
       return DesignSystemErrorHandler.handleToolError(
         async () => {
-          const health = {
+          const health: HealthStatus = {
             status: "healthy",
             timestamp: new Date().toISOString(),
             version: "1.0.0",
             service: "design-system-validator",
-            checks: {} as Record<string, any>,
+            checks: {} as Record<string, HealthCheckResult>,
             duration_ms: 0
           };
 
@@ -197,10 +202,10 @@ export function createHealthCheckTool(
           // メモリ使用量チェック
           const memUsage = process.memoryUsage();
           health.checks.memory = {
-            status: memUsage.heapUsed < 100 * 1024 * 1024 ? "healthy" : "warning", // 100MB threshold
-            heap_used_mb: Math.round(memUsage.heapUsed / 1024 / 1024),
-            heap_total_mb: Math.round(memUsage.heapTotal / 1024 / 1024),
-            external_mb: Math.round(memUsage.external / 1024 / 1024)
+            status: memUsage.heapUsed < MEMORY_WARNING_THRESHOLD_MB * BYTES_TO_MB ? "healthy" : "warning",
+            heap_used_mb: Math.round(memUsage.heapUsed / BYTES_TO_MB),
+            heap_total_mb: Math.round(memUsage.heapTotal / BYTES_TO_MB),
+            external_mb: Math.round(memUsage.external / BYTES_TO_MB)
           };
 
           // バリデーター機能のテスト
@@ -225,14 +230,14 @@ export function createHealthCheckTool(
           health.duration_ms = duration;
 
           // 全体的なステータスの評価
-          const errorChecks = Object.values(health.checks).filter(check => check.status === 'error');
+          const allChecks = Object.values(health.checks);
+          const errorChecks = allChecks.filter(check => check.status === 'error');
+          const warningChecks = allChecks.filter(check => check.status === 'warning');
+          
           if (errorChecks.length > 0) {
             health.status = "unhealthy";
-          } else {
-            const warningChecks = Object.values(health.checks).filter(check => check.status === 'warning');
-            if (warningChecks.length > 0) {
-              health.status = "degraded";
-            }
+          } else if (warningChecks.length > 0) {
+            health.status = "degraded";
           }
 
           // ヘルスチェック実行ログ
@@ -240,7 +245,7 @@ export function createHealthCheckTool(
             overall_status: health.status,
             checks_count: Object.keys(health.checks).length,
             errors: errorChecks.length,
-            warnings: Object.values(health.checks).filter(check => check.status === 'warning').length
+            warnings: warningChecks.length
           }, duration);
 
           return {

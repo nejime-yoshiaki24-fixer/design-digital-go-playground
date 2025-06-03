@@ -1,5 +1,5 @@
 import { resolve } from "path";
-import { ErrorContext, StandardErrorResponse, StandardSuccessResponse } from "../types.js";
+import { ErrorContext, StandardErrorResponse, StandardSuccessResponse, LogContext, ToolExecutionContext } from "../types.js";
 import { ConfigManager } from "../config.js";
 
 // ===== Structured Logging System =====
@@ -18,7 +18,7 @@ export class Logger {
     return Logger.instance;
   }
 
-  private formatLogMessage(level: string, operation: string, message: string, context?: Record<string, any>): string {
+  private formatLogMessage(level: string, operation: string, message: string, context?: LogContext): string {
     const config = this.configManager.getConfig();
     const logEntry = {
       timestamp: new Date().toISOString(),
@@ -36,37 +36,38 @@ export class Logger {
     }
   }
 
-  debug(operation: string, message: string, context?: Record<string, any>): void {
+  debug(operation: string, message: string, context?: LogContext): void {
     if (this.configManager.isLogLevelEnabled('DEBUG')) {
+      // eslint-disable-next-line no-console
       console.log(this.formatLogMessage('DEBUG', operation, message, context));
     }
   }
 
-  info(operation: string, message: string, context?: Record<string, any>): void {
+  info(operation: string, message: string, context?: LogContext): void {
     if (this.configManager.isLogLevelEnabled('INFO')) {
       console.error(this.formatLogMessage('INFO', operation, message, context));
     }
   }
 
-  warn(operation: string, message: string, context?: Record<string, any>): void {
+  warn(operation: string, message: string, context?: LogContext): void {
     if (this.configManager.isLogLevelEnabled('WARN')) {
       console.error(this.formatLogMessage('WARN', operation, message, context));
     }
   }
 
-  error(operation: string, message: string, context?: Record<string, any>): void {
+  error(operation: string, message: string, context?: LogContext): void {
     if (this.configManager.isLogLevelEnabled('ERROR')) {
       console.error(this.formatLogMessage('ERROR', operation, message, context));
     }
   }
 
-  logToolExecution(toolName: string, params: Record<string, any>, duration?: number): void {
+  logToolExecution(toolName: string, params: ToolExecutionContext, duration?: number): void {
     const config = this.configManager.getConfig();
     const sanitizedParams = config.isDevelopment ? params : this.sanitizeLogParams(params);
     
     this.info('tool_execution', `Tool ${toolName} executed`, {
       tool: toolName,
-      params: sanitizedParams,
+      ...sanitizedParams,
       duration_ms: duration
     });
   }
@@ -79,7 +80,7 @@ export class Logger {
     });
   }
 
-  private sanitizeLogParams(params: Record<string, any>): Record<string, any> {
+  private sanitizeLogParams(params: ToolExecutionContext): ToolExecutionContext {
     const sanitized = { ...params };
     
     // CSSコンテンツやパスなどの機密情報をマスク
@@ -100,7 +101,7 @@ export class DesignSystemErrorHandler {
   private static logger: Logger;
   private static configManager: ConfigManager;
 
-  static createErrorContext(operation: string, component?: string, path?: string, details?: Record<string, any>): ErrorContext {
+  static createErrorContext(operation: string, component?: string, path?: string, details?: LogContext): ErrorContext {
     return {
       operation,
       timestamp: new Date().toISOString(),
@@ -118,17 +119,17 @@ export class DesignSystemErrorHandler {
     }
 
     const config = this.configManager.getConfig();
-    const errorContext = {
-      component: context.component,
-      path: context.path,
-      details: config.isDevelopment ? {
-        stack: error.stack,
-        ...context.details
-      } : context.details
-    };
+    const errorDetails = config.isDevelopment ? {
+      stack: error.stack,
+      ...context.details
+    } : context.details;
 
     if (this.logger) {
-      this.logger.error(context.operation, error.message, errorContext);
+      this.logger.error(context.operation, error.message, {
+        component: context.component,
+        path: context.path,
+        ...errorDetails
+      });
     } else {
       console.error(`[DesignSystemMCP] Error during ${context.operation}:`, error.message);
     }
@@ -197,7 +198,7 @@ export class DesignSystemErrorHandler {
     this.logError(context, error);
     
     // パス関連のエラーの場合は具体的なメッセージを提供
-    if ((error as any).code === 'ENOENT') {
+    if ('code' in error && error.code === 'ENOENT') {
       return {
         content: [{
           type: "text" as const,

@@ -20,7 +20,7 @@
     "design-system-validator": "./dist/main.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp -r src/data dist/",
     "dev": "tsx watch src/main.ts",
     "start": "node dist/main.js",
     "inspector": "npm run build && npx @modelcontextprotocol/inspector node dist/main.js",
